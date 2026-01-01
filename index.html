@@ -3,388 +3,390 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Para Letícia ❤️ - Namora Comigo?</title>
+    <title>PRA LETÍCIA - NAMORA COMIGO PORRA! ❤️🔥</title>
     <link rel="shortcut icon" href="https://cdn-icons-png.flaticon.com/256/10174/10174277.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <style>
+    /* RESET PESADÃO */
     * {
         margin: 0;
         padding: 0;
         box-sizing: border-box;
-        transition: all 0.3s ease;
     }
     
     body {
-        background: linear-gradient(45deg, #ff6b6b, #ff8e8e, #ffb6b6, #ffd6d6);
-        background-size: 400% 400%;
-        animation: gradientAnimation 10s ease infinite;
+        background: #000;
         min-height: 100vh;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        padding: 20px;
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        overflow-x: hidden;
+        overflow: hidden;
+        font-family: 'Arial Black', Gadget, sans-serif;
         position: relative;
     }
     
-    @keyframes gradientAnimation {
+    /* FUNDO COM GRADIENTE ANIMADO BRABO */
+    .bg-animation {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(45deg, 
+            #ff0000, #ff3366, #ff0066, #cc0066,
+            #ff0066, #ff3366, #ff0000, #cc0000);
+        background-size: 800% 800%;
+        animation: bgPulse 15s ease infinite;
+        z-index: -2;
+    }
+    
+    @keyframes bgPulse {
+        0% { background-position: 0% 50%; filter: hue-rotate(0deg); }
+        50% { background-position: 100% 50%; filter: hue-rotate(180deg); }
+        100% { background-position: 0% 50%; filter: hue-rotate(360deg); }
+    }
+    
+    /* PARTÍCULAS NO FUNDO */
+    #particles {
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+    }
+    
+    .particle {
+        position: absolute;
+        width: 6px;
+        height: 6px;
+        background: rgba(255, 255, 255, 0.8);
+        border-radius: 50%;
+        animation: particleFloat 20s linear infinite;
+    }
+    
+    @keyframes particleFloat {
+        0% {
+            transform: translateY(100vh) translateX(0) rotate(0deg);
+            opacity: 0;
+        }
+        10% {
+            opacity: 1;
+        }
+        90% {
+            opacity: 1;
+        }
+        100% {
+            transform: translateY(-100px) translateX(100px) rotate(720deg);
+            opacity: 0;
+        }
+    }
+    
+    /* CONTAINER PRINCIPAL PESADÃO */
+    .main-container {
+        position: relative;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+        z-index: 10;
+    }
+    
+    /* TÍTULO EXPLOSIVO */
+    .title-explosion {
+        text-align: center;
+        margin: 30px 0 50px;
+        position: relative;
+    }
+    
+    .main-title {
+        font-size: 4.5rem;
+        color: white;
+        text-shadow: 
+            0 0 10px #ff0000,
+            0 0 20px #ff0066,
+            0 0 30px #ff3366,
+            0 0 40px #ff0000;
+        animation: titleGlow 2s infinite alternate;
+        margin-bottom: 10px;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        -webkit-text-stroke: 2px #ff0000;
+    }
+    
+    @keyframes titleGlow {
+        0% {
+            text-shadow: 
+                0 0 10px #ff0000,
+                0 0 20px #ff0066,
+                0 0 30px #ff3366,
+                0 0 40px #ff0000;
+        }
+        100% {
+            text-shadow: 
+                0 0 20px #ff3366,
+                0 0 30px #ff0066,
+                0 0 40px #ff0000,
+                0 0 50px #cc0000;
+            transform: scale(1.02);
+        }
+    }
+    
+    .subtitle {
+        font-size: 2rem;
+        color: #ffcccc;
+        text-shadow: 0 0 10px #ff0066;
+        animation: subtitleFloat 3s infinite alternate;
+    }
+    
+    @keyframes subtitleFloat {
+        0% { transform: translateY(0); }
+        100% { transform: translateY(-10px); }
+    }
+    
+    /* GALERIA DE FOTOS PESADÍSSIMA */
+    .photo-gallery {
+        display: flex;
+        justify-content: center;
+        gap: 30px;
+        margin: 50px 0;
+        flex-wrap: wrap;
+    }
+    
+    .photo-frame {
+        width: 300px;
+        height: 300px;
+        border-radius: 20px;
+        overflow: hidden;
+        position: relative;
+        border: 5px solid transparent;
+        background: linear-gradient(45deg, #ff0000, #ff3366, #ff0066) border-box;
+        animation: borderRotate 3s linear infinite;
+        box-shadow: 
+            0 0 30px #ff0066,
+            0 0 60px rgba(255, 0, 102, 0.5),
+            inset 0 0 30px rgba(255, 255, 255, 0.3);
+        transition: all 0.5s;
+    }
+    
+    @keyframes borderRotate {
         0% { background-position: 0% 50%; }
         50% { background-position: 100% 50%; }
         100% { background-position: 0% 50%; }
     }
     
-    /* Flores flutuantes */
-    .flower {
-        position: fixed;
-        font-size: 24px;
-        color: rgba(255, 255, 255, 0.7);
-        animation: floatFlower 20s linear infinite;
-        z-index: 0;
-    }
-    
-    @keyframes floatFlower {
-        0% {
-            transform: translateY(100vh) rotate(0deg);
-            opacity: 0;
-        }
-        10% {
-            opacity: 0.8;
-        }
-        90% {
-            opacity: 0.8;
-        }
-        100% {
-            transform: translateY(-100px) rotate(360deg);
-            opacity: 0;
-        }
-    }
-    
-    .painel {
-        margin: auto;
-        padding: 2.5rem;
-        width: 90%;
-        max-width: 650px;
-        background: linear-gradient(145deg, rgba(255, 255, 255, 0.98), rgba(255, 245, 245, 0.98));
-        text-align: center;
-        border-radius: 25px;
+    .photo-frame:hover {
+        transform: scale(1.1) rotate(5deg);
         box-shadow: 
-            0 20px 40px rgba(0, 0, 0, 0.15),
-            0 0 0 1px rgba(255, 107, 107, 0.1),
-            inset 0 0 30px rgba(255, 255, 255, 0.5);
-        position: relative;
-        overflow: hidden;
-        border: 10px solid transparent;
-        background-clip: padding-box;
-        z-index: 1;
+            0 0 50px #ff0066,
+            0 0 100px rgba(255, 0, 102, 0.8);
+        animation: borderRotate 1s linear infinite;
     }
     
-    .painel::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        border-radius: 25px;
-        padding: 10px;
-        background: linear-gradient(45deg, #ff6b6b, #ff8e8e, #ffb6b6);
-        -webkit-mask: 
-            linear-gradient(#fff 0 0) content-box, 
-            linear-gradient(#fff 0 0);
-        -webkit-mask-composite: xor;
-        mask-composite: exclude;
-        z-index: -1;
-    }
-    
-    .painel-header {
-        position: relative;
-        margin-bottom: 1.5rem;
-    }
-    
-    h1 {
-        font-size: 2.8rem;
-        color: #ff6b6b;
-        margin-bottom: 0.5rem;
-        text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.1);
-        position: relative;
-        background: linear-gradient(45deg, #ff6b6b, #ff8e8e);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        animation: textGlow 2s ease-in-out infinite alternate;
-    }
-    
-    @keyframes textGlow {
-        from { text-shadow: 0 0 10px rgba(255, 107, 107, 0.4); }
-        to { text-shadow: 0 0 20px rgba(255, 107, 107, 0.7); }
-    }
-    
-    .para-leticia {
-        font-size: 1.8rem;
-        color: #333;
-        margin-bottom: 2rem;
-        font-style: italic;
-        position: relative;
-        display: inline-block;
-    }
-    
-    .para-leticia::after {
-        content: '';
-        position: absolute;
-        bottom: -5px;
-        left: 10%;
-        width: 80%;
-        height: 3px;
-        background: linear-gradient(90deg, transparent, #ff6b6b, transparent);
-    }
-    
-    .heart-icon {
-        color: #ff6b6b;
-        font-size: 4rem;
-        margin: 1rem 0;
-        animation: heartbeat 1.2s ease-in-out infinite;
-        filter: drop-shadow(0 0 10px rgba(255, 107, 107, 0.3));
-    }
-    
-    @keyframes heartbeat {
-        0% { transform: scale(1); }
-        5% { transform: scale(1.15); }
-        10% { transform: scale(1); }
-        15% { transform: scale(1.15); }
-        20% { transform: scale(1); }
-        100% { transform: scale(1); }
-    }
-    
-    .fotos-container {
-        display: flex;
-        justify-content: center;
-        gap: 15px;
-        margin: 2rem 0;
-        flex-wrap: wrap;
-    }
-    
-    .foto-item {
-        position: relative;
-        width: 150px;
-        height: 150px;
-        border-radius: 20px;
-        overflow: hidden;
-        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
-        border: 5px solid white;
-        transition: all 0.4s ease;
-    }
-    
-    .foto-item:hover {
-        transform: translateY(-10px) scale(1.05);
-        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.25);
-    }
-    
-    .foto-placeholder {
+    .photo-frame img {
         width: 100%;
         height: 100%;
-        background: linear-gradient(135deg, #ffe6e6, #ffcccc);
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        color: #ff6b6b;
-        font-size: 0.9rem;
-        padding: 10px;
+        object-fit: cover;
+        transition: transform 0.8s;
+    }
+    
+    .photo-frame:hover img {
+        transform: scale(1.1);
+    }
+    
+    .photo-label {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: linear-gradient(transparent, rgba(255, 0, 102, 0.9));
+        color: white;
+        padding: 15px;
+        font-size: 1.2rem;
         text-align: center;
+        text-shadow: 0 0 10px black;
     }
     
-    .foto-placeholder i {
-        font-size: 2.5rem;
-        margin-bottom: 10px;
-    }
-    
-    .foto-instructions {
-        font-size: 0.8rem;
-        color: #666;
-        margin-top: 10px;
-        max-width: 400px;
-        margin: 10px auto;
-        padding: 10px;
-        background: rgba(255, 255, 255, 0.8);
-        border-radius: 10px;
-        border-left: 4px solid #ff6b6b;
-    }
-    
-    .gif-container {
-        margin: 1.5rem 0;
+    /* VÍDEO PESADÃO */
+    .video-bomb {
+        margin: 50px auto;
+        max-width: 800px;
+        position: relative;
         border-radius: 20px;
         overflow: hidden;
-        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-        border: 8px solid white;
+        border: 8px solid transparent;
+        background: linear-gradient(45deg, #ff0000, #ff3366, #ff0066) border-box;
+        animation: borderRotate 2s linear infinite;
+        box-shadow: 
+            0 0 50px #ff0000,
+            0 0 100px rgba(255, 0, 102, 0.7);
+    }
+    
+    .video-bomb::before {
+        content: 'CLICA AQUI, AMOR! 🔥';
+        position: absolute;
+        top: 20px;
+        left: 20px;
+        background: rgba(255, 0, 102, 0.9);
+        color: white;
+        padding: 10px 20px;
+        border-radius: 30px;
+        z-index: 2;
+        font-size: 1.2rem;
+        animation: pulseButton 1s infinite alternate;
+    }
+    
+    @keyframes pulseButton {
+        0% { transform: scale(1); }
+        100% { transform: scale(1.1); }
+    }
+    
+    .video-container {
+        width: 100%;
+        height: 450px;
+        background: #000;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
         position: relative;
     }
     
-    .gif-container::before {
-        content: 'Nós 💕';
+    .video-container i {
+        font-size: 5rem;
+        color: #ff0066;
+        text-shadow: 0 0 20px white;
+        animation: heartBeat 1s infinite;
+    }
+    
+    @keyframes heartBeat {
+        0%, 100% { transform: scale(1); }
+        50% { transform: scale(1.2); }
+    }
+    
+    /* PERGUNTA EXPLOSIVA */
+    .question-bomb {
+        background: rgba(0, 0, 0, 0.8);
+        border: 5px solid #ff0066;
+        border-radius: 30px;
+        padding: 40px;
+        margin: 50px 0;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+        box-shadow: 
+            0 0 50px #ff0066,
+            inset 0 0 50px rgba(255, 0, 102, 0.3);
+    }
+    
+    .question-bomb::before {
+        content: '';
         position: absolute;
-        top: 10px;
-        left: 10px;
-        background: rgba(255, 107, 107, 0.9);
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: linear-gradient(
+            45deg,
+            transparent,
+            rgba(255, 255, 255, 0.1),
+            transparent
+        );
+        animation: shine 3s infinite;
+    }
+    
+    @keyframes shine {
+        0% { transform: translateX(-100%) translateY(-100%) rotate(0deg); }
+        100% { transform: translateX(100%) translateY(100%) rotate(360deg); }
+    }
+    
+    .question-text {
+        font-size: 3.5rem;
         color: white;
-        padding: 5px 15px;
-        border-radius: 20px;
-        font-size: 0.9rem;
+        text-shadow: 
+            0 0 10px #ff0000,
+            0 0 20px #ff0066;
+        margin-bottom: 20px;
+        position: relative;
         z-index: 2;
     }
     
-    img {
-        width: 100%;
-        max-width: 350px;
-        display: block;
-    }
-    
-    h2 {
-        color: #333;
-        font-size: 2rem;
-        margin: 1.5rem 0;
-        position: relative;
-        padding-bottom: 10px;
-    }
-    
-    h2::after {
-        content: '❤️';
-        position: absolute;
-        bottom: -5px;
-        left: 50%;
-        transform: translateX(-50%);
-        font-size: 1.5rem;
-    }
-    
-    .botoes {
+    /* BOTÕES PESADÍSSIMOS */
+    .button-apocalypse {
         display: flex;
         justify-content: center;
-        align-items: center;
+        gap: 50px;
+        margin: 50px 0;
         flex-wrap: wrap;
-        gap: 25px;
-        margin: 2.5rem 0;
-        position: relative;
     }
     
-    button {
-        height: 70px;
-        width: 160px;
+    .btn {
+        padding: 25px 60px;
+        font-size: 2rem;
         border: none;
         border-radius: 50px;
-        font-size: 1.3rem;
-        font-weight: bold;
         cursor: pointer;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        gap: 12px;
-        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         position: relative;
         overflow: hidden;
+        font-weight: bold;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        transition: all 0.3s;
+        min-width: 250px;
+        box-shadow: 
+            0 10px 30px rgba(0, 0, 0, 0.5),
+            0 0 30px rgba(255, 0, 102, 0.5);
+        animation: btnFloat 3s infinite alternate;
     }
     
-    button::before {
+    @keyframes btnFloat {
+        0% { transform: translateY(0); }
+        100% { transform: translateY(-15px); }
+    }
+    
+    .btn::before {
         content: '';
         position: absolute;
         top: 0;
         left: -100%;
         width: 100%;
         height: 100%;
-        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+        background: linear-gradient(
+            90deg,
+            transparent,
+            rgba(255, 255, 255, 0.4),
+            transparent
+        );
         transition: 0.5s;
     }
     
-    button:hover::before {
+    .btn:hover::before {
         left: 100%;
     }
     
-    #sim {
-        background: linear-gradient(45deg, #ff6b6b, #ff8e8e);
+    .btn-yes {
+        background: linear-gradient(45deg, #ff0000, #ff3366);
         color: white;
-        margin: 0;
+        text-shadow: 0 0 10px white;
     }
     
-    #sim:hover {
-        background: linear-gradient(45deg, #ff5252, #ff7b7b);
-        transform: translateY(-8px) scale(1.08);
-        box-shadow: 0 15px 30px rgba(255, 107, 107, 0.4);
+    .btn-yes:hover {
+        background: linear-gradient(45deg, #ff3366, #ff0000);
+        transform: scale(1.1);
+        box-shadow: 
+            0 20px 40px rgba(0, 0, 0, 0.7),
+            0 0 60px rgba(255, 0, 102, 0.8);
+        animation: none;
     }
     
-    #nao {
-        background: linear-gradient(45deg, #777, #999);
-        color: white;
+    .btn-no {
+        background: linear-gradient(45deg, #333, #666);
+        color: #ccc;
         position: relative;
     }
     
-    #nao:hover {
-        background: linear-gradient(45deg, #666, #888);
-        transform: translateY(-8px);
+    .btn-no:hover {
+        background: linear-gradient(45deg, #222, #555);
+        transform: scale(0.95);
     }
     
-    .frases-container {
-        margin-top: 2.5rem;
-        padding: 1.5rem;
-        background: linear-gradient(135deg, #fff9f9, #fff0f0);
-        border-radius: 20px;
-        border-left: 8px solid #ff6b6b;
-        display: none;
-        opacity: 0;
-        transition: opacity 0.8s ease;
-        position: relative;
-        overflow: hidden;
-    }
-    
-    .frases-container::before {
-        content: '💌';
-        position: absolute;
-        top: 10px;
-        right: 15px;
-        font-size: 1.5rem;
-        opacity: 0.3;
-    }
-    
-    .frases-container.show {
-        display: block;
-        opacity: 1;
-        animation: slideIn 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    }
-    
-    @keyframes slideIn {
-        from { opacity: 0; transform: translateY(30px) scale(0.9); }
-        to { opacity: 1; transform: translateY(0) scale(1); }
-    }
-    
-    .frase {
-        font-size: 1.4rem;
-        color: #ff6b6b;
-        margin: 1.2rem 0;
-        padding: 1rem;
-        font-style: italic;
-        background: rgba(255, 255, 255, 0.7);
-        border-radius: 15px;
-        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-        animation: fraseAppear 3.5s ease forwards;
-        opacity: 0;
-        transform: translateX(-20px);
-        border: 1px solid rgba(255, 107, 107, 0.1);
-    }
-    
-    @keyframes fraseAppear {
-        0% { opacity: 0; transform: translateX(-20px); }
-        15% { opacity: 1; transform: translateX(0); }
-        85% { opacity: 1; transform: translateX(0); }
-        100% { opacity: 0; transform: translateX(20px); }
-    }
-    
-    .frase:nth-child(1) { animation-delay: 0.5s; }
-    .frase:nth-child(2) { animation-delay: 4.5s; }
-    .frase:nth-child(3) { animation-delay: 8.5s; }
-    .frase:nth-child(4) { animation-delay: 12.5s; }
-    .frase:nth-child(5) { animation-delay: 16.5s; }
-    .frase:nth-child(6) { animation-delay: 20.5s; }
-    
-    .confetes {
+    /* EFEITOS DE ACEITAÇÃO */
+    .accept-effect {
         position: fixed;
         top: 0;
         left: 0;
@@ -395,513 +397,387 @@
         display: none;
     }
     
-    .confete {
+    .firework {
         position: absolute;
-        width: 20px;
-        height: 20px;
-        background-color: #ff6b6b;
+        width: 10px;
+        height: 10px;
         border-radius: 50%;
-        opacity: 0;
-        animation: confeteFall 5s linear forwards;
+        animation: fireworkExplode 1s forwards;
     }
     
-    .confete:nth-child(2n) { background-color: #ff8e8e; }
-    .confete:nth-child(3n) { background-color: #ffe6e6; }
-    .confete:nth-child(5n) { 
-        background-color: #ffb6b6;
-        width: 25px;
-        height: 25px;
-    }
-    
-    @keyframes confeteFall {
+    @keyframes fireworkExplode {
         0% {
-            transform: translateY(-100px) rotate(0deg);
-            opacity: 0;
-        }
-        10% {
-            opacity: 1;
-        }
-        90% {
+            transform: scale(1);
             opacity: 1;
         }
         100% {
-            transform: translateY(100vh) rotate(720deg);
+            transform: scale(20);
             opacity: 0;
         }
     }
     
-    .love-letter {
+    .love-message {
         position: fixed;
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%) scale(0);
-        background: white;
-        padding: 2rem;
+        background: rgba(0, 0, 0, 0.9);
+        border: 5px solid #ff0066;
         border-radius: 20px;
-        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-        z-index: 2000;
-        width: 90%;
-        max-width: 500px;
-        text-align: left;
-        display: none;
-        border: 3px solid #ff6b6b;
-    }
-    
-    .love-letter.show {
-        display: block;
-        animation: letterAppear 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
-    }
-    
-    @keyframes letterAppear {
-        0% { transform: translate(-50%, -50%) scale(0); opacity: 0; }
-        100% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
-    }
-    
-    .letter-header {
-        text-align: center;
-        margin-bottom: 1.5rem;
-        border-bottom: 2px solid #ffe6e6;
-        padding-bottom: 1rem;
-    }
-    
-    .letter-content {
-        line-height: 1.6;
-        color: #333;
-        font-size: 1.1rem;
-    }
-    
-    .close-letter {
-        position: absolute;
-        top: 15px;
-        right: 15px;
-        background: #ff6b6b;
+        padding: 40px;
         color: white;
-        border: none;
-        width: 30px;
-        height: 30px;
-        border-radius: 50%;
-        cursor: pointer;
-        font-size: 1.2rem;
+        text-align: center;
+        z-index: 2000;
+        max-width: 600px;
+        width: 90%;
+        display: none;
+        box-shadow: 0 0 100px #ff0066;
     }
     
-    .footer {
-        margin-top: 2.5rem;
-        color: #777;
-        font-size: 0.9rem;
-        padding-top: 1rem;
-        border-top: 1px solid rgba(255, 107, 107, 0.2);
+    .love-message.show {
+        display: block;
+        animation: messagePop 0.8s forwards cubic-bezier(0.175, 0.885, 0.32, 1.275);
     }
     
-    .footer-heart {
-        color: #ff6b6b;
-        animation: pulse 1.5s infinite;
+    @keyframes messagePop {
+        0% { transform: translate(-50%, -50%) scale(0); }
+        70% { transform: translate(-50%, -50%) scale(1.1); }
+        100% { transform: translate(-50%, -50%) scale(1); }
     }
     
-    @keyframes pulse {
-        0% { transform: scale(1); }
-        50% { transform: scale(1.2); }
-        100% { transform: scale(1); }
+    .message-title {
+        font-size: 2.5rem;
+        color: #ff0066;
+        margin-bottom: 20px;
+        text-shadow: 0 0 10px #ff0066;
     }
     
-    @media (max-width: 600px) {
-        h1 {
-            font-size: 2.2rem;
+    /* RESPONSIVO PESADÃO */
+    @media (max-width: 768px) {
+        .main-title {
+            font-size: 2.5rem;
         }
         
-        .para-leticia {
+        .subtitle {
             font-size: 1.5rem;
         }
         
-        h2 {
-            font-size: 1.7rem;
+        .photo-frame {
+            width: 250px;
+            height: 250px;
         }
         
-        button {
-            width: 140px;
-            height: 65px;
-            font-size: 1.1rem;
+        .question-text {
+            font-size: 2rem;
         }
         
-        .painel {
-            padding: 1.8rem;
+        .btn {
+            padding: 20px 40px;
+            font-size: 1.5rem;
+            min-width: 200px;
         }
         
-        .foto-item {
-            width: 130px;
-            height: 130px;
+        .video-container {
+            height: 300px;
         }
     }
 </style>
 <body>
-    <!-- Flores flutuantes -->
-    <div id="flowersContainer"></div>
+    <!-- FUNDO ANIMADO -->
+    <div class="bg-animation"></div>
+    <div id="particles"></div>
     
-    <section class="painel">
-        <div class="painel-header">
-            <div class="heart-icon">
-                <i class="fas fa-heart"></i>
+    <div class="main-container">
+        <!-- TÍTULO -->
+        <div class="title-explosion">
+            <h1 class="main-title">LETÍCIA, EU TE AMO! ❤️🔥</h1>
+            <div class="subtitle">Este pedido é o mais FODA que você já viu!</div>
+        </div>
+        
+        <!-- FOTOS PESADÍSSIMAS -->
+        <div class="photo-gallery">
+            <div class="photo-frame">
+                <img src="https://ibb.co/MxMYtN83/photo-2025-01-14-16-16-30.jpg" alt="Nós dois 1">
+                <div class="photo-label">EU E VOCÊ ❤️</div>
             </div>
             
-            <h1>Para Minha Letícia ❤️</h1>
-            
-            <div class="para-leticia">
-                Este pedido é só para você, amor!
-            </div>
-        </div>
-        
-        <!-- Container para suas fotos -->
-        
-        <div class="fotos-container">
-            <div class="foto-item" id="foto1">
-                <img src="https://i.ibb.co/1f62qJW3/photo-2025-01-14-16-16-30.jpg" alt="Nossa foto especial" style="width:100%; height:100%; object-fit:cover;">
+            <div class="photo-frame">
+                <img src="https://ibb.co/ynLDNXqR/photo-2025-01-14-16-16-30.jpg" alt="Nós dois 2">
+                <div class="photo-label">JUNTINHOS SEMPRE 💕</div>
             </div>
             
-            <div class="foto-item" id="foto2">
-                <div class="foto-placeholder">
-                    <i class="fas fa-heart"></i>
-                    <span>Outra foto nossa</span>
-                    <small>Adicione mais fotos</small>
-                </div>
-            </div>
-            
-            <div class="foto-item" id="foto3">
-                <div class="foto-placeholder">
-                    <i class="fas fa-smile"></i>
-                    <span>Mais uma foto</span>
-                    <small>Adicione mais fotos</small>
-                </div>
+            <div class="photo-frame">
+                <img src="https://ibb.co/tTf450nH" alt="Nós dois 3">
+                <div class="photo-label">NOSSO AMOR É FOGO! 🔥</div>
             </div>
         </div>
         
-        <div class="gif-container">
-            <img src="https://gifman.net/wp-content/uploads/2019/06/ursinhos-fofos-coracoes.gif" alt="Nós dois felizes">
+        <!-- VÍDEO PESADÃO -->
+        <div class="video-bomb" id="videoContainer">
+            <div class="video-container" onclick="abrirVideo()">
+                <i class="fas fa-play-circle"></i>
+            </div>
         </div>
         
-        <h2>Letícia, Aceita Namorar Comigo?</h2>
-        
-        <div class="botoes">
-            <button id="sim">
-                <i class="fas fa-heart"></i> SIM 😍
-            </button>
-            <button id="nao">
-                <i class="fas fa-heart-broken"></i> NÃO 💔
-            </button>
-        </div>
-        
-        <div class="frases-container" id="frasesContainer">
-            <div class="frase" id="frase1">Letícia, você é a pessoa mais especial da minha vida!</div>
-            <div class="frase" id="frase2">Cada momento ao seu lado é o melhor presente que eu poderia receber!</div>
-            <div class="frase" id="frase3">Meu coração bate diferente quando estou com você!</div>
-            <div class="frase" id="frase4">Você trouxe cores e alegria para minha vida, Letícia!</div>
-            <div class="frase" id="frase5">Prometo fazer você feliz todos os dias da nossa vida juntos!</div>
-            <div class="frase" id="frase6">Eu te amo mais do que todas as palavras podem dizer! ❤️</div>
-        </div>
-        
-        <div class="footer">
-            <p>Feito com <span class="footer-heart">❤️</span> especialmente para você, Letícia!</p>
-            <p>Este momento ficará guardado para sempre em meu coração</p>
-        </div>
-    </section>
-    
-    <!-- Carta de amor -->
-    <div class="love-letter" id="loveLetter">
-        <button class="close-letter" onclick="fecharCarta()">×</button>
-        <div class="letter-header">
-            <h3>Para Minha Letícia 💌</h3>
-            <p><em>Uma carta do meu coração para o seu</em></p>
-        </div>
-        <div class="letter-content">
-            <p>Meu amor,</p>
-            <p>Desde que você entrou na minha vida, tudo mudou para melhor. Cada sorriso seu ilumina meu dia, cada momento ao seu lado é especial.</p>
-            <p>Não consigo imaginar minha vida sem você. Você é a pessoa mais incrível que já conheci, e eu sou grato todos os dias por ter você comigo.</p>
-            <p>Esta não é apenas uma pergunta, é a realização de um sonho. O sonho de poder te chamar oficialmente de MINHA NAMORADA.</p>
-            <p>Eu te amo mais do que palavras podem expressar!</p>
-            <p style="text-align: right; margin-top: 2rem;">
-                Com todo meu amor,<br>
-                <strong>Para sempre seu ❤️</strong>
+        <!-- PERGUNTA -->
+        <div class="question-bomb">
+            <div class="question-text">
+                LETÍCIA, ACEITA NAMORAR COMIGO?
+            </div>
+            <p style="color: #ffcccc; font-size: 1.5rem; margin-top: 20px;">
+                Não tem como dizer não pra essa fofura aqui em cima! 😏
             </p>
+        </div>
+        
+        <!-- BOTÕES -->
+        <div class="button-apocalypse">
+            <button class="btn btn-yes" id="btnYes">
+                <i class="fas fa-heart"></i> SIM, QUERO! 😍
+            </button>
+            <button class="btn btn-no" id="btnNo">
+                <i class="fas fa-heart-broken"></i> NÃO PODE 💔
+            </button>
         </div>
     </div>
     
-    <div class="confetes" id="confetes"></div>
+    <!-- EFEITO DE ACEITAÇÃO -->
+    <div class="accept-effect" id="acceptEffect"></div>
     
+    <!-- MENSAGEM DE AMOR -->
+    <div class="love-message" id="loveMessage">
+        <div class="message-title">LETÍCIA DISSE SIM! 🎉❤️</div>
+        <p style="font-size: 1.3rem; margin: 20px 0; line-height: 1.6;">
+            AEEEEEEEE PORRA! AGORA É OFICIAL!<br>
+            VOCÊ É MINHA NAMORADA! 🥹🔥<br><br>
+            Eu te amo mais que tudo nesse mundo!<br>
+            Vamos ser felizes pra sempre! 💍✨
+        </p>
+        <button onclick="fecharMensagem()" style="
+            background: #ff0066;
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            border-radius: 30px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            margin-top: 20px;
+            font-weight: bold;
+        ">
+            CLICA AQUI PRA VER NOSSO VÍDEO! 🎬
+        </button>
+    </div>
+
 <script>
-    // Cria flores flutuantes
-    function criarFlores() {
-        const flowersContainer = document.getElementById('flowersContainer');
-        const emojis = ['🌸', '🌺', '🌷', '💐', '🌹', '🥀', '🌼', '💮'];
+    // PARTÍCULAS NO FUNDO
+    function criarParticulas() {
+        const container = document.getElementById('particles');
+        const colors = ['#ff0000', '#ff3366', '#ff0066', '#ff6699', '#ff9999'];
         
-        for (let i = 0; i < 20; i++) {
-            const flower = document.createElement('div');
-            flower.className = 'flower';
-            flower.innerHTML = emojis[Math.floor(Math.random() * emojis.length)];
-            
-            // Posição aleatória
-            flower.style.left = Math.random() * 100 + '%';
-            flower.style.fontSize = (Math.random() * 20 + 15) + 'px';
-            
-            // Atraso e duração aleatórios
-            flower.style.animationDelay = Math.random() * 20 + 's';
-            flower.style.animationDuration = (Math.random() * 10 + 15) + 's';
-            
-            flowersContainer.appendChild(flower);
+        for (let i = 0; i < 150; i++) {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.width = Math.random() * 8 + 4 + 'px';
+            particle.style.height = particle.style.width;
+            particle.style.background = colors[Math.floor(Math.random() * colors.length)];
+            particle.style.animationDelay = Math.random() * 20 + 's';
+            particle.style.animationDuration = Math.random() * 10 + 15 + 's';
+            container.appendChild(particle);
         }
     }
     
-    // Função para fazer o botão "Não" fugir
-    function fuja() {
-        const botaoNao = document.getElementById("nao");
+    // BOTÃO NÃO FUGE
+    function fazerBotaoFugir() {
+        const btnNo = document.getElementById('btnNo');
+        const maxX = window.innerWidth - btnNo.offsetWidth - 100;
+        const maxY = window.innerHeight - btnNo.offsetHeight - 100;
         
-        // Torna o botão menor
-        botaoNao.style.transform = "scale(0.85)";
+        const x = Math.max(50, Math.random() * maxX);
+        const y = Math.max(50, Math.random() * maxY);
         
-        const larguraJanela = window.innerWidth;
-        const alturaJanela = window.innerHeight;
+        btnNo.style.position = 'fixed';
+        btnNo.style.left = x + 'px';
+        btnNo.style.top = y + 'px';
+        btnNo.style.transform = 'scale(0.9)';
         
-        // Calcula posições aleatórias
-        const maxX = larguraJanela - botaoNao.offsetWidth - 50;
-        const maxY = alturaJanela - botaoNao.offsetHeight - 50;
-        
-        // Garante que não saia da tela
-        const aleatorioX = Math.floor(Math.random() * Math.max(50, maxX));
-        const aleatorioY = Math.floor(Math.random() * Math.max(50, maxY));
-        
-        // Aplica a nova posição
-        botaoNao.style.position = "fixed";
-        botaoNao.style.left = aleatorioX + "px";
-        botaoNao.style.top = aleatorioY + "px";
-        
-        // Efeito extra: muda a cor
-        botaoNao.style.background = "linear-gradient(45deg, #999, #bbb)";
-        
+        // Efeito de tremor
+        btnNo.style.animation = 'shake 0.5s';
         setTimeout(() => {
-            botaoNao.style.transform = "scale(0.8)";
-        }, 150);
+            btnNo.style.animation = '';
+        }, 500);
+        
+        // Toca som de erro
+        tocarSom('error');
     }
     
-    // Função para exibir frases românticas
-    function parabens() {
-        // Exibe o container de frases
-        const frasesContainer = document.getElementById("frasesContainer");
-        frasesContainer.classList.add("show");
-        
-        // Cria efeito de confetes
-        criarConfetes();
-        
-        // Mostra carta de amor após 3 segundos
-        setTimeout(() => {
-            document.getElementById('loveLetter').classList.add('show');
-        }, 3000);
-        
-        // Mostra mensagem final após todas as frases
-        setTimeout(() => {
-            // Fecha a carta
-            document.getElementById('loveLetter').classList.remove('show');
+    // SOM PESADÃO
+    function tocarSom(tipo) {
+        try {
+            const audioContext = new (window.AudioContext || window.webkitAudioContext)();
             
-            // Mensagem especial
-            const mensagem = `Letícia, você aceitou! ❤️\n\nEu estou tão feliz que não consigo expressar em palavras!\nAgora oficialmente posso te chamar de MINHA NAMORADA! 🥹🥰\n\nEu te amo mais do que tudo neste mundo!\nEsta é apenas o começo da nossa linda história juntos.`;
+            if (tipo === 'error') {
+                // Som de erro quando tenta clicar em NÃO
+                const oscillator = audioContext.createOscillator();
+                const gainNode = audioContext.createGain();
+                
+                oscillator.connect(gainNode);
+                gainNode.connect(audioContext.destination);
+                
+                oscillator.frequency.setValueAtTime(200, audioContext.currentTime);
+                gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
+                gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.3);
+                
+                oscillator.start();
+                oscillator.stop(audioContext.currentTime + 0.3);
+                
+            } else if (tipo === 'yes') {
+                // Som de vitória quando clica em SIM
+                const oscillator = audioContext.createOscillator();
+                const gainNode = audioContext.createGain();
+                
+                oscillator.connect(gainNode);
+                gainNode.connect(audioContext.destination);
+                
+                oscillator.frequency.setValueAtTime(523.25, audioContext.currentTime); // Dó
+                gainNode.gain.setValueAtTime(0, audioContext.currentTime);
+                gainNode.gain.linearRampToValueAtTime(0.3, audioContext.currentTime + 0.1);
+                gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.5);
+                
+                oscillator.start();
+                
+                setTimeout(() => {
+                    oscillator.frequency.setValueAtTime(659.25, audioContext.currentTime); // Mi
+                    gainNode.gain.setValueAtTime(0, audioContext.currentTime);
+                    gainNode.gain.linearRampToValueAtTime(0.3, audioContext.currentTime + 0.1);
+                    gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.5);
+                }, 200);
+                
+                setTimeout(() => {
+                    oscillator.frequency.setValueAtTime(783.99, audioContext.currentTime); // Sol
+                    gainNode.gain.setValueAtTime(0, audioContext.currentTime);
+                    gainNode.gain.linearRampToValueAtTime(0.3, audioContext.currentTime + 0.1);
+                    gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.5);
+                }, 400);
+                
+                oscillator.stop(audioContext.currentTime + 0.7);
+            }
+        } catch (e) {
+            console.log('Áudio não disponível');
+        }
+    }
+    
+    // FOGOS DE ARTIFÍCIO
+    function criarFogosDeArtificio(x, y) {
+        const container = document.getElementById('acceptEffect');
+        const colors = ['#ff0000', '#ff3366', '#ff0066', '#ff6699', '#ffffff'];
+        
+        for (let i = 0; i < 50; i++) {
+            const firework = document.createElement('div');
+            firework.className = 'firework';
+            firework.style.left = x + 'px';
+            firework.style.top = y + 'px';
+            firework.style.background = colors[Math.floor(Math.random() * colors.length)];
+            firework.style.animationDelay = Math.random() * 0.5 + 's';
             
-            // Cria um alerta personalizado
-            criarAlertaEspecial(mensagem);
+            container.appendChild(firework);
             
-            // Redireciona para o vídeo especial após 8 segundos
+            // Remove depois da animação
             setTimeout(() => {
-                window.open("https://youtu.be/1A-1M_0ytO4?si=07G1a_3Obx65Rdy1", "_blank");
-            }, 8000);
-            
-        }, 24000); // 24 segundos (tempo para todas as frases + carta)
-    }
-    
-    // Cria alerta especial
-    function criarAlertaEspecial(mensagem) {
-        // Remove qualquer alerta anterior
-        const alertaAntigo = document.querySelector('.custom-alert');
-        if (alertaAntigo) alertaAntigo.remove();
-        
-        // Cria o alerta personalizado
-        const alerta = document.createElement('div');
-        alerta.className = 'custom-alert';
-        alerta.innerHTML = `
-            <div class="alert-content">
-                <div class="alert-header">
-                    <i class="fas fa-heart"></i>
-                    <h3>Letícia disse SIM! ❤️</h3>
-                </div>
-                <div class="alert-body">
-                    ${mensagem.split('\n').map(line => `<p>${line}</p>`).join('')}
-                </div>
-                <button class="alert-ok" onclick="this.parentElement.parentElement.remove()">
-                    Estou tão feliz! 🥰
-                </button>
-            </div>
-        `;
-        
-        // Adiciona estilos
-        const estilo = document.createElement('style');
-        estilo.textContent = `
-            .custom-alert {
-                position: fixed;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                background: rgba(0, 0, 0, 0.7);
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                z-index: 3000;
-                animation: fadeIn 0.5s;
-            }
-            
-            .alert-content {
-                background: white;
-                padding: 2rem;
-                border-radius: 20px;
-                max-width: 500px;
-                width: 90%;
-                text-align: center;
-                box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-                border: 5px solid #ff6b6b;
-                animation: scaleIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            }
-            
-            .alert-header {
-                color: #ff6b6b;
-                margin-bottom: 1.5rem;
-            }
-            
-            .alert-header i {
-                font-size: 3rem;
-                margin-bottom: 1rem;
-                animation: heartbeat 1.5s infinite;
-            }
-            
-            .alert-body {
-                text-align: left;
-                margin-bottom: 1.5rem;
-                line-height: 1.6;
-            }
-            
-            .alert-ok {
-                background: linear-gradient(45deg, #ff6b6b, #ff8e8e);
-                color: white;
-                border: none;
-                padding: 12px 30px;
-                border-radius: 50px;
-                font-size: 1.1rem;
-                cursor: pointer;
-                margin-top: 1rem;
-                transition: all 0.3s;
-            }
-            
-            .alert-ok:hover {
-                transform: scale(1.05);
-                box-shadow: 0 8px 20px rgba(255, 107, 107, 0.4);
-            }
-            
-            @keyframes scaleIn {
-                from { transform: scale(0.7); opacity: 0; }
-                to { transform: scale(1); opacity: 1; }
-            }
-        `;
-        
-        document.head.appendChild(estilo);
-        document.body.appendChild(alerta);
-    }
-    
-    // Cria efeito de confetes
-    function criarConfetes() {
-        const confetesContainer = document.getElementById("confetes");
-        confetesContainer.style.display = "block";
-        
-        // Cria 200 confetes
-        for (let i = 0; i < 200; i++) {
-            const confete = document.createElement("div");
-            confete.className = "confete";
-            
-            // Posição aleatória
-            confete.style.left = Math.random() * 100 + "%";
-            
-            // Tamanhos variados
-            const size = Math.random() * 15 + 10;
-            confete.style.width = size + "px";
-            confete.style.height = size + "px";
-            
-            // Formas diferentes
-            if (i % 7 === 0) {
-                confete.style.borderRadius = "0";
-                confete.style.transform = "rotate(45deg)";
-            } else if (i % 5 === 0) {
-                confete.style.borderRadius = "5px";
-            }
-            
-            // Atraso e duração aleatórios
-            confete.style.animationDelay = Math.random() * 5 + "s";
-            confete.style.animationDuration = Math.random() * 3 + 4 + "s";
-            
-            confetesContainer.appendChild(confete);
+                firework.remove();
+            }, 1000);
         }
     }
     
-    // Fecha a carta de amor
-    function fecharCarta() {
-        document.getElementById('loveLetter').classList.remove('show');
+    // QUANDO CLICA EM SIM
+    function aceitouNamoro() {
+        // Toca som de vitória
+        tocarSom('yes');
+        
+        // Mostra efeitos visuais
+        document.getElementById('acceptEffect').style.display = 'block';
+        
+        // Cria fogos em posições aleatórias
+        for (let i = 0; i < 10; i++) {
+            setTimeout(() => {
+                const x = Math.random() * window.innerWidth;
+                const y = Math.random() * window.innerHeight;
+                criarFogosDeArtificio(x, y);
+            }, i * 300);
+        }
+        
+        // Mostra mensagem após 2 segundos
+        setTimeout(() => {
+            document.getElementById('loveMessage').classList.add('show');
+        }, 2000);
+        
+        // Faz os botões dançarem
+        const btnYes = document.getElementById('btnYes');
+        btnYes.style.animation = 'none';
+        setTimeout(() => {
+            btnYes.style.animation = 'dance 1s infinite';
+        }, 100);
     }
     
-    // Adiciona instruções para fotos
-    function adicionarInstrucoesFotos() {
-        // Esta função poderia ser usada para implementar upload de fotos
-        console.log("Para adicionar suas fotos:");
-        console.log("1. Tire print das suas fotos com a Letícia");
-        console.log("2. Envie para algum serviço de nuvem (Google Fotos, Imgur, etc)");
-        console.log("3. Substitua as divs com classe 'foto-placeholder' por tags <img> com o link da foto");
+    // ABRIR VÍDEO
+    function abrirVideo() {
+        window.open('https://youtu.be/1A-1M_0ytO4?si=07G1a_3Obx65Rdy1', '_blank');
     }
     
-    // Inicialização quando a página carrega
-    document.addEventListener("DOMContentLoaded", function() {
-        const botaoSim = document.getElementById("sim");
-        const botaoNao = document.getElementById("nao");
+    // FECHAR MENSAGEM E ABRIR VÍDEO
+    function fecharMensagem() {
+        document.getElementById('loveMessage').classList.remove('show');
+        setTimeout(() => {
+            abrirVideo();
+        }, 500);
+    }
+    
+    // INICIALIZAÇÃO
+    document.addEventListener('DOMContentLoaded', function() {
+        // Cria partículas
+        criarParticulas();
         
-        // Cria as flores flutuantes
-        criarFlores();
+        // Configura botões
+        const btnYes = document.getElementById('btnYes');
+        const btnNo = document.getElementById('btnNo');
         
-        // Adiciona eventos aos botões
-        botaoSim.addEventListener("click", parabens);
-        botaoNao.addEventListener("mouseover", fuja);
-        botaoNao.addEventListener("touchstart", fuja);
+        btnYes.addEventListener('click', aceitouNamoro);
         
-        // Também faz o botão fugir se tentarem clicar
-        botaoNao.addEventListener("click", function() {
-            const mensagens = [
-                "Ops! Você errou o botão, amor! 😉",
-                "Tenta de novo! O certo é o outro botão! 💕",
-                "Não é esse, meu amor! O outro! ❤️",
-                "Letícia, você sabe qual é o botão certo! 😊"
-            ];
-            alert(mensagens[Math.floor(Math.random() * mensagens.length)]);
-            fuja();
+        // Botão NÃO foge quando passa o mouse
+        btnNo.addEventListener('mouseenter', fazerBotaoFugir);
+        btnNo.addEventListener('touchstart', fazerBotaoFugir);
+        
+        // Se tentar clicar em NÃO
+        btnNo.addEventListener('click', function() {
+            alert('ERROU, AMOR! O BOTÃO CERTO É O OUTRO! 😉❤️');
+            fazerBotaoFugir();
         });
         
-        // Adiciona efeito de digitação no título
-        const titulo = document.querySelector('.para-leticia');
-        const textoOriginal = titulo.textContent;
-        titulo.textContent = '';
-        
-        let i = 0;
-        function digitar() {
-            if (i < textoOriginal.length) {
-                titulo.textContent += textoOriginal.charAt(i);
-                i++;
-                setTimeout(digitar, 80);
-            }
+        // Faz o título piscar
+        setInterval(() => {
+            const title = document.querySelector('.main-title');
+            title.style.textShadow = title.style.textShadow.includes('60px') 
+                ? '0 0 10px #ff0000, 0 0 20px #ff0066, 0 0 30px #ff3366, 0 0 40px #ff0000'
+                : '0 0 20px #ff3366, 0 0 40px #ff0066, 0 0 60px #ff0000, 0 0 80px #cc0000';
+        }, 1000);
+    });
+    
+    // ANIMAÇÃO DE DANÇA
+    const style = document.createElement('style');
+    style.textContent = `
+        @keyframes shake {
+            0%, 100% { transform: translateX(0) scale(0.9); }
+            25% { transform: translateX(-10px) scale(0.9); }
+            75% { transform: translateX(10px) scale(0.9); }
         }
         
-        // Inicia a digitação após 1 segundo
-        setTimeout(digitar, 1000);
-        
-        // Instruções para fotos
-        adicionarInstrucoesFotos();
-    });
+        @keyframes dance {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            25% { transform: translateY(-20px) rotate(5deg); }
+            50% { transform: translateY(0) rotate(0deg); }
+            75% { transform: translateY(-20px) rotate(-5deg); }
+        }
+    `;
+    document.head.appendChild(style);
 </script>
 </body>
 </html>
