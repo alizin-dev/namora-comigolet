@@ -4,544 +4,959 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LETÍCIA - NAMORA COMIGO! ❤️</title>
-    <link rel="shortcut icon" href="https://cdn-icons-png.flaticon.com/256/10174/10174277.png">
+    <title>LETÍCIA - PEDIDO ESPECIAL ❤️</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://unpkg.com/typeit@8.7.0/dist/index.umd.js"></script>
 </head>
 <style>
-    /* RESET SIMPLES */
     * {
         margin: 0;
         padding: 0;
         box-sizing: border-box;
     }
-    
+
     body {
-        background: #000;
-        font-family: 'Arial', sans-serif;
-        overflow-x: hidden;
+        font-family: 'Poppins', sans-serif;
+        background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+        color: white;
         min-height: 100vh;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        padding: 20px;
+        overflow-x: hidden;
+        position: relative;
     }
-    
+
+    /* FUNDO COM ESTRELAS */
+    #stars {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+    }
+
+    .star {
+        position: absolute;
+        background: white;
+        border-radius: 50%;
+        animation: twinkle 3s infinite alternate;
+    }
+
+    @keyframes twinkle {
+        0% { opacity: 0.3; }
+        100% { opacity: 1; }
+    }
+
     /* CONTAINER PRINCIPAL */
     .container {
-        background: rgba(255, 0, 102, 0.1);
-        border: 5px solid #ff0066;
-        border-radius: 25px;
-        padding: 30px;
-        max-width: 900px;
-        width: 100%;
-        text-align: center;
-        box-shadow: 
-            0 0 50px #ff0066,
-            0 0 100px rgba(255, 0, 102, 0.3);
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
         position: relative;
-        overflow: hidden;
+        z-index: 10;
     }
-    
-    /* TÍTULO */
-    .titulo {
-        color: white;
-        font-size: 3rem;
+
+    /* HEADER COM ANIMAÇÃO */
+    .header {
+        text-align: center;
+        margin: 50px 0 30px;
+        padding: 20px;
+    }
+
+    .heart-pulse {
+        font-size: 80px;
+        color: #ff0066;
+        animation: heartbeat 1.2s infinite;
         margin-bottom: 20px;
-        text-shadow: 0 0 10px #ff0066;
-        animation: pulse 2s infinite;
+        display: inline-block;
+        text-shadow: 0 0 30px #ff0066;
     }
-    
-    @keyframes pulse {
+
+    @keyframes heartbeat {
         0% { transform: scale(1); }
-        50% { transform: scale(1.05); }
+        50% { transform: scale(1.2); }
         100% { transform: scale(1); }
     }
-    
+
+    .title {
+        font-family: 'Dancing Script', cursive;
+        font-size: 4.5rem;
+        background: linear-gradient(45deg, #ff0066, #ff6699, #ff99cc);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        margin-bottom: 10px;
+        text-shadow: 0 0 20px rgba(255, 0, 102, 0.3);
+    }
+
     .subtitle {
-        color: #ff99cc;
         font-size: 1.5rem;
-        margin-bottom: 40px;
+        color: #ff99cc;
+        margin-bottom: 30px;
+        opacity: 0.8;
     }
-    
-    /* FOTOS - AGORA FUNCIONANDO */
-    .fotos-grid {
-        display: flex;
-        justify-content: center;
-        gap: 20px;
-        margin: 40px 0;
-        flex-wrap: wrap;
-    }
-    
-    .foto {
-        width: 250px;
-        height: 250px;
-        border-radius: 20px;
-        overflow: hidden;
-        border: 3px solid #ff0066;
-        box-shadow: 0 0 20px #ff0066;
+
+    /* FOTOS EM SLIDER */
+    .photo-slider {
+        width: 90%;
+        max-width: 800px;
+        margin: 40px auto;
         position: relative;
-        transition: transform 0.3s;
+        border-radius: 25px;
+        overflow: hidden;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+        border: 5px solid transparent;
+        background: linear-gradient(45deg, #ff0066, #ff6699) border-box;
     }
-    
-    .foto:hover {
-        transform: scale(1.05);
-        box-shadow: 0 0 30px #ff0066;
+
+    .slider-container {
+        display: flex;
+        transition: transform 0.8s ease;
+        height: 400px;
     }
-    
-    .foto img {
+
+    .slide {
+        min-width: 100%;
+        height: 100%;
+        position: relative;
+    }
+
+    .slide img {
         width: 100%;
         height: 100%;
         object-fit: cover;
-        display: block;
     }
-    
-    /* VÍDEO */
-    .video-box {
-        margin: 40px 0;
+
+    .slide-text {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: linear-gradient(transparent, rgba(0, 0, 0, 0.9));
         padding: 20px;
-        background: rgba(255, 0, 102, 0.1);
-        border-radius: 15px;
+        text-align: center;
+        font-size: 1.3rem;
+        color: white;
     }
-    
-    .video-btn {
-        background: #ff0066;
+
+    .slider-btn {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background: rgba(255, 0, 102, 0.7);
         color: white;
         border: none;
-        padding: 15px 30px;
-        border-radius: 50px;
-        font-size: 1.2rem;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        font-size: 1.5rem;
         cursor: pointer;
-        margin-top: 10px;
         transition: all 0.3s;
-        display: inline-flex;
-        align-items: center;
-        gap: 10px;
+        z-index: 20;
     }
-    
-    .video-btn:hover {
-        background: #ff3385;
-        transform: scale(1.05);
+
+    .slider-btn:hover {
+        background: rgba(255, 0, 102, 1);
+        transform: translateY(-50%) scale(1.1);
     }
-    
-    /* PERGUNTA */
-    .pergunta {
-        background: rgba(255, 255, 255, 0.1);
-        padding: 30px;
-        border-radius: 20px;
-        margin: 30px 0;
-        border: 2px solid #ff0066;
-    }
-    
-    .pergunta h2 {
-        color: white;
-        font-size: 2.5rem;
-        margin-bottom: 20px;
-    }
-    
-    /* BOTÕES - VISÍVEIS SEM CLICAR */
-    .botoes {
+
+    .prev { left: 20px; }
+    .next { right: 20px; }
+
+    .slider-dots {
+        position: absolute;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
         display: flex;
-        justify-content: center;
-        gap: 30px;
-        margin: 40px 0;
-        flex-wrap: wrap;
+        gap: 10px;
+        z-index: 20;
     }
-    
-    .botao {
-        padding: 20px 50px;
+
+    .dot {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.5);
+        cursor: pointer;
+        transition: all 0.3s;
+    }
+
+    .dot.active {
+        background: #ff0066;
+        transform: scale(1.3);
+    }
+
+    /* PERGUNTA ESPECIAL */
+    .question-box {
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+        border-radius: 30px;
+        padding: 50px;
+        margin: 50px auto;
+        max-width: 800px;
+        text-align: center;
+        border: 2px solid rgba(255, 0, 102, 0.3);
+        box-shadow: 
+            0 0 40px rgba(255, 0, 102, 0.2),
+            inset 0 0 40px rgba(255, 0, 102, 0.1);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .question-box::before {
+        content: '';
+        position: absolute;
+        top: -2px;
+        left: -2px;
+        right: -2px;
+        bottom: -2px;
+        background: linear-gradient(45deg, #ff0066, #ff6699, #ff0066);
+        z-index: -1;
+        border-radius: 30px;
+        animation: borderRotate 4s linear infinite;
+    }
+
+    @keyframes borderRotate {
+        0% { filter: hue-rotate(0deg); }
+        100% { filter: hue-rotate(360deg); }
+    }
+
+    .question {
+        font-size: 3rem;
+        margin-bottom: 30px;
+        color: white;
+        text-shadow: 0 0 10px rgba(255, 0, 102, 0.5);
+        font-family: 'Dancing Script', cursive;
+    }
+
+    /* BOTÕES INTERATIVOS */
+    .buttons-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 25px;
+        max-width: 800px;
+        margin: 40px auto;
+        padding: 0 20px;
+    }
+
+    .interactive-btn {
+        padding: 25px;
         font-size: 1.5rem;
         border: none;
-        border-radius: 50px;
+        border-radius: 20px;
         cursor: pointer;
-        font-weight: bold;
-        transition: all 0.3s;
-        min-width: 200px;
-        display: inline-flex;
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        position: relative;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
         align-items: center;
         justify-content: center;
-        gap: 10px;
-    }
-    
-    .botao-sim {
-        background: linear-gradient(45deg, #ff0066, #ff3385);
-        color: white;
-        box-shadow: 0 5px 15px rgba(255, 0, 102, 0.4);
-    }
-    
-    .botao-sim:hover {
-        background: linear-gradient(45deg, #ff3385, #ff0066);
-        transform: translateY(-5px);
-        box-shadow: 0 10px 20px rgba(255, 0, 102, 0.6);
-    }
-    
-    .botao-nao {
-        background: #333;
-        color: #ccc;
-        position: relative;
-        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-    }
-    
-    .botao-nao:hover {
-        background: #444;
-        transform: translateY(-5px);
-    }
-    
-    /* MENSAGEM DE ACEITAÇÃO */
-    .mensagem-aceito {
-        position: fixed;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%) scale(0);
-        background: rgba(0, 0, 0, 0.95);
-        padding: 40px;
-        border-radius: 20px;
-        border: 5px solid #ff0066;
-        color: white;
+        gap: 15px;
+        font-weight: 600;
         text-align: center;
-        z-index: 1000;
-        max-width: 500px;
-        width: 90%;
-        box-shadow: 0 0 100px #ff0066;
-        display: none;
+        min-height: 180px;
     }
-    
-    .mensagem-aceito.mostrar {
-        display: block;
-        animation: aparecer 0.5s forwards;
+
+    .btn-yes {
+        background: linear-gradient(135deg, #ff0066, #ff3385);
+        color: white;
+        box-shadow: 0 10px 30px rgba(255, 0, 102, 0.4);
+        grid-column: span 2;
     }
-    
-    @keyframes aparecer {
-        to { transform: translate(-50%, -50%) scale(1); }
+
+    .btn-yes:hover {
+        transform: translateY(-10px) scale(1.05);
+        box-shadow: 0 20px 40px rgba(255, 0, 102, 0.6);
     }
-    
-    /* PARTÍCULAS SIMPLES */
-    .particula {
+
+    .btn-no {
+        background: linear-gradient(135deg, #333, #555);
+        color: white;
+        position: relative;
+    }
+
+    .btn-no:hover {
+        background: linear-gradient(135deg, #444, #666);
+        transform: translateY(-5px);
+    }
+
+    .btn-extra {
+        background: linear-gradient(135deg, #0066cc, #0099ff);
+        color: white;
+    }
+
+    .btn-extra:hover {
+        transform: translateY(-5px) scale(1.05);
+        box-shadow: 0 15px 30px rgba(0, 102, 204, 0.4);
+    }
+
+    .btn-icon {
+        font-size: 2.5rem;
+        margin-bottom: 10px;
+    }
+
+    /* MENSAGEM TIPO MÁQUINA DE ESCREVER */
+    .typewriter-container {
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 20px;
+        padding: 30px;
+        margin: 40px auto;
+        max-width: 800px;
+        border-left: 5px solid #ff0066;
+        min-height: 200px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .typewriter-text {
+        font-size: 1.8rem;
+        color: #ff99cc;
+        font-family: 'Dancing Script', cursive;
+        text-align: center;
+        line-height: 1.6;
+    }
+
+    /* CORAÇÕES FLUTUANTES */
+    .floating-hearts {
         position: fixed;
-        width: 4px;
-        height: 4px;
-        background: #ff0066;
-        border-radius: 50%;
+        width: 100%;
+        height: 100%;
         pointer-events: none;
-        z-index: -1;
+        z-index: 1;
     }
-    
+
+    .floating-heart {
+        position: absolute;
+        font-size: 24px;
+        opacity: 0;
+        animation: floatUp 20s linear infinite;
+    }
+
+    @keyframes floatUp {
+        0% {
+            transform: translateY(100vh) rotate(0deg);
+            opacity: 0;
+        }
+        10% {
+            opacity: 0.7;
+        }
+        90% {
+            opacity: 0.7;
+        }
+        100% {
+            transform: translateY(-100px) rotate(360deg);
+            opacity: 0;
+        }
+    }
+
+    /* FOOTER */
+    .footer {
+        text-align: center;
+        margin-top: 60px;
+        padding: 30px;
+        color: #999;
+        font-size: 0.9rem;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    /* MODAL ESPECIAL */
+    .modal-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.9);
+        display: none;
+        justify-content: center;
+        align-items: center;
+        z-index: 1000;
+        backdrop-filter: blur(10px);
+    }
+
+    .modal-content {
+        background: linear-gradient(135deg, #1a1a2e, #16213e);
+        padding: 50px;
+        border-radius: 30px;
+        max-width: 600px;
+        width: 90%;
+        text-align: center;
+        border: 3px solid #ff0066;
+        box-shadow: 0 0 60px #ff0066;
+        position: relative;
+        animation: modalAppear 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    @keyframes modalAppear {
+        from { transform: scale(0.5); opacity: 0; }
+        to { transform: scale(1); opacity: 1; }
+    }
+
+    .close-modal {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        background: #ff0066;
+        color: white;
+        border: none;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        font-size: 1.5rem;
+        cursor: pointer;
+    }
+
     /* RESPONSIVO */
     @media (max-width: 768px) {
-        .titulo {
-            font-size: 2rem;
+        .title {
+            font-size: 3rem;
         }
         
-        .pergunta h2 {
-            font-size: 1.8rem;
+        .question {
+            font-size: 2.2rem;
         }
         
-        .foto {
-            width: 200px;
-            height: 200px;
+        .buttons-grid {
+            grid-template-columns: 1fr;
         }
         
-        .botao {
-            padding: 15px 30px;
-            font-size: 1.2rem;
-            min-width: 150px;
+        .btn-yes {
+            grid-column: span 1;
+        }
+        
+        .photo-slider {
+            height: 300px;
+        }
+        
+        .slider-container {
+            height: 300px;
         }
     }
 </style>
 <body>
+    <!-- ESTRELAS NO FUNDO -->
+    <div id="stars"></div>
+    
+    <!-- CORAÇÕES FLUTUANTES -->
+    <div class="floating-hearts" id="floatingHearts"></div>
+    
     <div class="container">
-        <!-- TÍTULO -->
-        <h1 class="titulo">LETÍCIA ❤️</h1>
-        <div class="subtitle">Este pedido é só pra você, meu amor!</div>
+        <!-- HEADER -->
+        <div class="header">
+            <div class="heart-pulse">❤️</div>
+            <h1 class="title">Para Minha Letícia</h1>
+            <div class="subtitle">Um pedido que vem do fundo do coração</div>
+        </div>
         
-        <!-- FOTOS DE VOCÊS - COM LINKS CORRETOS -->
-        <div class="fotos-grid">
-            <div class="foto">
-                <img src="https://i.ibb.co/1f62qJW3/photo-2025-01-14-16-16-30.jpg" 
-                     alt="Nossa foto 1"
-                     onerror="this.src='https://i.ibb.co/1f62qJW3/photo-2025-01-14-16-16-30.jpg'">
+        <!-- SLIDER DE FOTOS -->
+        <div class="photo-slider">
+            <button class="slider-btn prev" onclick="prevSlide()">‹</button>
+            <button class="slider-btn next" onclick="nextSlide()">›</button>
+            
+            <div class="slider-container" id="sliderContainer">
+                <div class="slide">
+                    <img src="https://i.ibb.co/1f62qJW3/photo-2025-01-14-16-16-30.jpg" alt="Nossa foto 1">
+                    <div class="slide-text">Nossa primeira lembrança juntos 💖</div>
+                </div>
+                <div class="slide">
+                    <img src="https://i.ibb.co/tTf450nH/foto2.jpg" alt="Nossa foto 2">
+                    <div class="slide-text">Cada momento ao seu lado é especial ✨</div>
+                </div>
+                <div class="slide">
+                    <img src="https://i.ibb.co/ynLDNXqR/foto3.jpg" alt="Nossa foto 3">
+                    <div class="slide-text">Meu maior presente é você! 🎁</div>
+                </div>
             </div>
             
-            <div class="foto">
-                <img src="https://i.ibb.co/tTf450nH/foto2.jpg" 
-                     alt="Nossa foto 2"
-                     onerror="this.onerror=null; this.src='https://i.ibb.co/tTf450nH/foto2.jpg'">
-            </div>
-            
-            <div class="foto">
-                <img src="https://i.ibb.co/ynLDNXqR/foto3.jpg" 
-                     alt="Nossa foto 3"
-                     onerror="this.onerror=null; this.src='https://i.ibb.co/ynLDNXqR/foto3.jpg'">
+            <div class="slider-dots" id="sliderDots">
+                <span class="dot active" onclick="goToSlide(0)"></span>
+                <span class="dot" onclick="goToSlide(1)"></span>
+                <span class="dot" onclick="goToSlide(2)"></span>
             </div>
         </div>
         
-        <!-- VÍDEO ESPECIAL -->
-        <div class="video-box">
-            <h3 style="color: #ff99cc; margin-bottom: 15px;">📹 Tem um vídeo especial pra você!</h3>
-            <button class="video-btn" onclick="abrirVideo()">
-                ▶️ CLICA AQUI PRA VER
-            </button>
+        <!-- MENSAGEM TYPEWRITER -->
+        <div class="typewriter-container">
+            <div class="typewriter-text" id="typewriter">
+                <!-- Texto será inserido via JavaScript -->
+            </div>
         </div>
         
-        <!-- PERGUNTA -->
-        <div class="pergunta">
-            <h2>LETÍCIA, QUER NAMORAR COMIGO? 💍</h2>
-            <p style="color: #ff99cc; font-size: 1.2rem;">
-                Esta é a pergunta mais importante da minha vida...
+        <!-- PERGUNTA PRINCIPAL -->
+        <div class="question-box">
+            <h2 class="question">Letícia, aceita namorar comigo?</h2>
+            <p style="color: #ffccdd; font-size: 1.3rem; margin-top: 20px;">
+                Este é o momento mais importante da minha vida...
             </p>
         </div>
         
-        <!-- BOTÕES - AGORA VISÍVEIS -->
-        <div class="botoes">
-            <button class="botao botao-sim" id="btnSim">
-                💖 SIM, EU QUERO!
+        <!-- GRADE DE BOTÕES INTERATIVOS -->
+        <div class="buttons-grid">
+            <button class="interactive-btn btn-yes" id="btnYes">
+                <i class="fas fa-heart btn-icon"></i>
+                SIM! QUERO SER SUA NAMORADA! 💍
             </button>
-            <button class="botao botao-nao" id="btnNao">
-                😢 NÃO POSSO...
+            
+            <button class="interactive-btn btn-no" id="btnNo">
+                <i class="fas fa-heart-broken btn-icon"></i>
+                NÃO POSSO AGORA... 😢
+            </button>
+            
+            <button class="interactive-btn btn-extra" onclick="mostrarSurpresa()">
+                <i class="fas fa-gift btn-icon"></i>
+                CLIQUE PARA UMA SURPRESA! 🎁
+            </button>
+            
+            <button class="interactive-btn btn-extra" onclick="abrirVideo()">
+                <i class="fas fa-play-circle btn-icon"></i>
+                VER VÍDEO ESPECIAL 🎬
             </button>
         </div>
         
-        <!-- RODAPÉ -->
-        <div style="margin-top: 40px; color: #ff99cc; font-size: 0.9rem;">
-            <p>Feito com todo meu amor ❤️</p>
-            <p>Espero que goste, minha princesa!</p>
+        <!-- BOTÕES EXTRAS -->
+        <div style="text-align: center; margin: 40px 0;">
+            <button class="interactive-btn" onclick="fazerPergunta()" 
+                    style="background: linear-gradient(135deg, #9900cc, #cc00ff); color: white; padding: 20px 40px; display: inline-flex; min-height: auto;">
+                <i class="fas fa-question-circle"></i>
+                PERGUNTA ESPECIAL PARA VOCÊ! ❓
+            </button>
         </div>
     </div>
     
-    <!-- MENSAGEM QUANDO ACEITA -->
-    <div class="mensagem-aceito" id="mensagemAceito">
-        <h2 style="color: #ff0066; font-size: 2.5rem; margin-bottom: 20px;">
-            🎉 LETÍCIA ACEITOU! 🎉
-        </h2>
-        <p style="font-size: 1.2rem; line-height: 1.6; margin-bottom: 30px;">
-            AEEEEEE! AGORA É OFICIAL!<br>
-            VOCÊ É MINHA NAMORADA! 🥹💖<br><br>
-            Eu te amo mais que tudo!<br>
-            Vamos ser felizes pra sempre!
-        </p>
-        <button onclick="fecharMensagemEAbrirVideo()" 
-                style="background: #ff0066; color: white; border: none; padding: 15px 40px; border-radius: 50px; font-size: 1.1rem; cursor: pointer;">
-            ▶️ VER NOSSO VÍDEO ESPECIAL
-        </button>
+    <!-- MODAL DE ACEITAÇÃO -->
+    <div class="modal-overlay" id="modalOverlay">
+        <div class="modal-content">
+            <button class="close-modal" onclick="fecharModal()">×</button>
+            <div class="heart-pulse" style="font-size: 60px;">🎉</div>
+            <h2 style="font-size: 3rem; color: #ff0066; margin: 20px 0;">LETÍCIA DISSE SIM!</h2>
+            <p style="font-size: 1.4rem; line-height: 1.6; margin: 30px 0;">
+                AGORA É OFICIAL! VOCÊ É MINHA NAMORADA! 🥹💖<br><br>
+                Eu te amo mais do que palavras podem expressar!<br>
+                Esta é apenas o começo da nossa história... ❤️
+            </p>
+            <button onclick="celebrar()" style="
+                background: linear-gradient(135deg, #ff0066, #ff3385);
+                color: white;
+                border: none;
+                padding: 20px 50px;
+                border-radius: 50px;
+                font-size: 1.3rem;
+                cursor: pointer;
+                margin-top: 20px;
+                font-weight: bold;
+            ">
+                <i class="fas fa-play"></i> VER NOSSO VÍDEO ESPECIAL
+            </button>
+        </div>
+    </div>
+    
+    <!-- FOOTER -->
+    <div class="footer">
+        <p>Feito com muito amor e carinho ❤️</p>
+        <p>Especialmente para você, Letícia - Minha futura namorada! 💕</p>
     </div>
 
 <script>
-    // PARTÍCULAS NO FUNDO
-    function criarParticulas() {
-        const cores = ['#ff0066', '#ff3385', '#ff6699', '#ff99cc'];
+    // VARIÁVEIS GLOBAIS
+    let currentSlide = 0;
+    const totalSlides = 3;
+    let fugasCount = 0;
+    let heartsCreated = false;
+    
+    // INICIALIZAÇÃO
+    document.addEventListener('DOMContentLoaded', function() {
+        criarEstrelas();
+        criarCoracoesFlutuantes();
+        iniciarTypeWriter();
+        configurarBotoes();
+        iniciarSlider();
         
-        for (let i = 0; i < 80; i++) {
-            const particula = document.createElement('div');
-            particula.className = 'particula';
-            
-            // Posição aleatória
-            particula.style.left = Math.random() * 100 + '%';
-            particula.style.top = Math.random() * 100 + '%';
-            
-            // Tamanho aleatório
-            const tamanho = Math.random() * 3 + 2;
-            particula.style.width = tamanho + 'px';
-            particula.style.height = tamanho + 'px';
-            
-            // Cor aleatória
-            particula.style.background = cores[Math.floor(Math.random() * cores.length)];
-            
-            // Animação
-            particula.style.animation = `float ${Math.random() * 10 + 10}s linear infinite`;
-            particula.style.animationDelay = Math.random() * 5 + 's';
-            
-            document.body.appendChild(particula);
+        // Toca música de fundo suave
+        setTimeout(() => {
+            tocarMusicaFundo();
+        }, 1000);
+    });
+    
+    // CRIAR ESTRELAS NO FUNDO
+    function criarEstrelas() {
+        const starsContainer = document.getElementById('stars');
+        for (let i = 0; i < 200; i++) {
+            const star = document.createElement('div');
+            star.className = 'star';
+            star.style.width = Math.random() * 3 + 1 + 'px';
+            star.style.height = star.style.width;
+            star.style.left = Math.random() * 100 + '%';
+            star.style.top = Math.random() * 100 + '%';
+            star.style.animationDelay = Math.random() * 3 + 's';
+            star.style.animationDuration = Math.random() * 2 + 1 + 's';
+            starsContainer.appendChild(star);
         }
-        
-        // Adiciona a animação de float
-        const style = document.createElement('style');
-        style.textContent = `
-            @keyframes float {
-                0% {
-                    transform: translateY(0) translateX(0);
-                    opacity: 0;
-                }
-                10% {
-                    opacity: 0.8;
-                }
-                90% {
-                    opacity: 0.8;
-                }
-                100% {
-                    transform: translateY(-100vh) translateX(100px);
-                    opacity: 0;
-                }
-            }
-        `;
-        document.head.appendChild(style);
     }
     
-    // BOTÃO NÃO FUGE
-    let fugas = 0;
+    // CRIAR CORAÇÕES FLUTUANTES
+    function criarCoracoesFlutuantes() {
+        if (heartsCreated) return;
+        
+        const heartsContainer = document.getElementById('floatingHearts');
+        const heartEmojis = ['❤️', '💖', '💕', '💗', '💓', '💞', '💘'];
+        
+        for (let i = 0; i < 30; i++) {
+            const heart = document.createElement('div');
+            heart.className = 'floating-heart';
+            heart.innerHTML = heartEmojis[Math.floor(Math.random() * heartEmojis.length)];
+            heart.style.left = Math.random() * 100 + '%';
+            heart.style.fontSize = (Math.random() * 20 + 15) + 'px';
+            heart.style.animationDelay = Math.random() * 20 + 's';
+            heart.style.animationDuration = Math.random() * 10 + 15 + 's';
+            heartsContainer.appendChild(heart);
+        }
+        
+        heartsCreated = true;
+    }
     
-    function fazerBotaoFugir() {
-        const btnNao = document.getElementById('btnNao');
-        fugas++;
-        
-        // Limites da tela
-        const maxX = window.innerWidth - btnNao.offsetWidth - 50;
-        const maxY = window.innerHeight - btnNao.offsetHeight - 50;
-        
-        // Nova posição aleatória
-        const novaX = Math.max(50, Math.random() * maxX);
-        const novaY = Math.max(50, Math.random() * maxY);
-        
-        // Muda posição
-        btnNao.style.position = 'fixed';
-        btnNao.style.left = novaX + 'px';
-        btnNao.style.top = novaY + 'px';
-        
-        // Efeitos visuais
-        btnNao.style.transform = 'scale(0.9)';
-        btnNao.style.background = '#222';
-        
-        // Frases engraçadas conforme o número de fugas
-        const frases = [
-            "Ops! Tenta de novo! 😉",
-            "O botão certo é o outro! 💖",
-            "Não fuja do amor! ❤️",
-            "Vem pro lado vermelho! 🔥",
-            "Letícia, você sabe qual é o certo! 😊",
-            "Não seja timida! 😘",
-            "O sim é mais bonito! 🌹"
+    // TYPEWRITER EFFECT
+    function iniciarTypeWriter() {
+        const texts = [
+            "Letícia, desde que você entrou na minha vida...",
+            "Tudo ganhou mais cor, mais luz, mais sentido.",
+            "Cada sorriso seu é como o sol da manhã...",
+            "Cada momento ao seu lado é um presente.",
+            "Você é a pessoa mais especial que já conheci.",
+            "E hoje quero te fazer uma pergunta muito importante..."
         ];
         
-        alert(frases[Math.min(fugas - 1, frases.length - 1)]);
+        let currentText = 0;
+        const typewriterEl = document.getElementById('typewriter');
         
-        // Volta ao normal depois de 1 segundo
-        setTimeout(() => {
-            btnNao.style.transform = '';
-            btnNao.style.background = '';
-        }, 1000);
-    }
-    
-    // QUANDO ACEITA
-    function aceitou() {
-        // Mostra mensagem
-        document.getElementById('mensagemAceito').classList.add('mostrar');
-        
-        // Cria confetes
-        criarConfetes();
-        
-        // Toca som (se disponível)
-        tocarSomVitoria();
-    }
-    
-    // CONFETES
-    function criarConfetes() {
-        const cores = ['#ff0066', '#ff3385', '#ff6699', '#ff99cc', '#ffccdd'];
-        
-        for (let i = 0; i < 100; i++) {
-            setTimeout(() => {
-                const confete = document.createElement('div');
-                confete.style.position = 'fixed';
-                confete.style.width = '10px';
-                confete.style.height = '10px';
-                confete.style.background = cores[Math.floor(Math.random() * cores.length)];
-                confete.style.borderRadius = '50%';
-                confete.style.left = Math.random() * 100 + '%';
-                confete.style.top = '-20px';
-                confete.style.zIndex = '999';
-                
-                // Animação
-                confete.style.animation = `confeteCair ${Math.random() * 2 + 1}s linear forwards`;
-                
-                document.body.appendChild(confete);
-                
-                // Remove depois
-                setTimeout(() => confete.remove(), 2000);
-            }, i * 50);
+        function typeNext() {
+            if (currentText >= texts.length) {
+                currentText = 0;
+                setTimeout(typeNext, 3000);
+                return;
+            }
+            
+            typewriterEl.innerHTML = '';
+            
+            new TypeIt(typewriterEl, {
+                strings: texts[currentText],
+                speed: 30,
+                waitUntilVisible: true,
+                afterComplete: () => {
+                    currentText++;
+                    setTimeout(typeNext, 2000);
+                }
+            }).go();
         }
         
-        // Adiciona animação
+        typeNext();
+    }
+    
+    // CONFIGURAR BOTÕES
+    function configurarBotoes() {
+        const btnYes = document.getElementById('btnYes');
+        const btnNo = document.getElementById('btnNo');
+        
+        // BOTÃO SIM
+        btnYes.addEventListener('click', function() {
+            // Efeitos visuais
+            criarExplosaoDeCoracoes();
+            
+            // Toca som de vitória
+            tocarSom('vitoria');
+            
+            // Mostra confetes
+            lancarConfetes();
+            
+            // Mostra modal
+            setTimeout(() => {
+                document.getElementById('modalOverlay').style.display = 'flex';
+            }, 1000);
+            
+            // Animação do botão
+            this.style.animation = 'heartbeat 0.5s 3';
+        });
+        
+        // BOTÃO NÃO - FUGE
+        btnNo.addEventListener('mouseover', fazerBotaoFugir);
+        btnNo.addEventListener('click', function() {
+            const messages = [
+                "Errou o botão, amor! 😉",
+                "Tenta o outro botão! 💖",
+                "O certo é o vermelho! 🔥",
+                "Letícia, você sabe qual é o certo! 🥰",
+                "Não fuja do amor! ❤️",
+                "Vem pro lado da felicidade! 😄"
+            ];
+            
+            Swal.fire({
+                title: messages[Math.min(fugasCount, messages.length - 1)],
+                icon: 'warning',
+                timer: 2000,
+                showConfirmButton: false
+            });
+            
+            fazerBotaoFugir();
+            fugasCount++;
+        });
+    }
+    
+    // FAZER BOTÃO NÃO FUGIR
+    function fazerBotaoFugir() {
+        const btnNo = document.getElementById('btnNo');
+        const maxX = window.innerWidth - btnNo.offsetWidth - 100;
+        const maxY = window.innerHeight - btnNo.offsetHeight - 100;
+        
+        const newX = Math.max(50, Math.random() * maxX);
+        const newY = Math.max(50, Math.random() * maxY);
+        
+        btnNo.style.position = 'fixed';
+        btnNo.style.left = newX + 'px';
+        btnNo.style.top = newY + 'px';
+        btnNo.style.transition = 'all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
+        
+        // Efeito visual
+        btnNo.style.transform = 'scale(0.9)';
+        btnNo.style.background = 'linear-gradient(135deg, #222, #444)';
+        
+        setTimeout(() => {
+            btnNo.style.transform = '';
+            btnNo.style.background = '';
+        }, 500);
+    }
+    
+    // SLIDER DE FOTOS
+    function iniciarSlider() {
+        // Auto-slide
+        setInterval(() => {
+            nextSlide();
+        }, 5000);
+    }
+    
+    function nextSlide() {
+        currentSlide = (currentSlide + 1) % totalSlides;
+        updateSlider();
+    }
+    
+    function prevSlide() {
+        currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+        updateSlider();
+    }
+    
+    function goToSlide(index) {
+        currentSlide = index;
+        updateSlider();
+    }
+    
+    function updateSlider() {
+        const slider = document.getElementById('sliderContainer');
+        const dots = document.querySelectorAll('.dot');
+        
+        slider.style.transform = `translateX(-${currentSlide * 100}%)`;
+        
+        dots.forEach((dot, index) => {
+            dot.classList.toggle('active', index === currentSlide);
+        });
+    }
+    
+    // EFEITOS ESPECIAIS
+    function criarExplosaoDeCoracoes() {
+        const emojis = ['❤️', '💖', '💕', '💗', '💓', '💞', '💘', '🥰', '😍'];
+        
+        for (let i = 0; i < 50; i++) {
+            setTimeout(() => {
+                const heart = document.createElement('div');
+                heart.innerHTML = emojis[Math.floor(Math.random() * emojis.length)];
+                heart.style.position = 'fixed';
+                heart.style.fontSize = '30px';
+                heart.style.left = Math.random() * 100 + '%';
+                heart.style.top = Math.random() * 100 + '%';
+                heart.style.zIndex = '1000';
+                heart.style.pointerEvents = 'none';
+                heart.style.animation = `explodeHeart 1s forwards`;
+                
+                document.body.appendChild(heart);
+                
+                setTimeout(() => heart.remove(), 1000);
+            }, i * 30);
+        }
+        
+        // Adiciona animação CSS
         const style = document.createElement('style');
         style.textContent = `
-            @keyframes confeteCair {
-                0% {
-                    transform: translateY(0) rotate(0deg);
-                    opacity: 1;
-                }
-                100% {
-                    transform: translateY(100vh) rotate(360deg);
-                    opacity: 0;
-                }
+            @keyframes explodeHeart {
+                0% { transform: scale(0) rotate(0deg); opacity: 1; }
+                100% { transform: scale(3) rotate(360deg); opacity: 0; }
             }
         `;
         document.head.appendChild(style);
     }
     
-    // SOM DE VITÓRIA
-    function tocarSomVitoria() {
-        try {
-            // Tenta tocar um som simples
-            const audioContext = new (window.AudioContext || window.webkitAudioContext)();
-            const oscillator = audioContext.createOscillator();
-            const gainNode = audioContext.createGain();
-            
-            oscillator.connect(gainNode);
-            gainNode.connect(audioContext.destination);
-            
-            // Notas de uma escala feliz
-            const notas = [523.25, 659.25, 783.99, 1046.50]; // Dó, Mi, Sol, Dó
-            
-            notas.forEach((nota, index) => {
-                setTimeout(() => {
-                    oscillator.frequency.setValueAtTime(nota, audioContext.currentTime);
-                    gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
-                    gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.2);
-                }, index * 200);
-            });
-            
-            oscillator.start();
-            setTimeout(() => oscillator.stop(), 1000);
-        } catch (e) {
-            // Ignora erro se áudio não estiver disponível
+    function lancarConfetes() {
+        const colors = ['#ff0066', '#ff3385', '#ff6699', '#ff99cc', '#ffccdd'];
+        
+        for (let i = 0; i < 150; i++) {
+            setTimeout(() => {
+                const confetti = document.createElement('div');
+                confetti.style.position = 'fixed';
+                confetti.style.width = '15px';
+                confetti.style.height = '15px';
+                confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
+                confetti.style.borderRadius = '50%';
+                confetti.style.left = Math.random() * 100 + '%';
+                confetti.style.top = '-20px';
+                confetti.style.zIndex = '999';
+                confetti.style.animation = `confettiFall ${Math.random() * 2 + 1}s linear forwards`;
+                
+                document.body.appendChild(confetti);
+                
+                setTimeout(() => confetti.remove(), 2000);
+            }, i * 20);
         }
+        
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes confettiFall {
+                0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+                100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+            }
+        `;
+        document.head.appendChild(style);
     }
     
-    // ABRIR VÍDEO
+    // FUNÇÕES DOS BOTÕES EXTRAS
+    function mostrarSurpresa() {
+        Swal.fire({
+            title: 'Surpresa para você! 🎁',
+            html: `
+                <div style="text-align: left; padding: 20px;">
+                    <p style="margin-bottom: 15px;">✨ <b>5 motivos porque eu te amo:</b></p>
+                    <p>1. Seu sorriso ilumina meu dia</p>
+                    <p>2. Você me faz ser uma pessoa melhor</p>
+                    <p>3. Cada momento com você é especial</p>
+                    <p>4. Você é a pessoa mais incrível que conheço</p>
+                    <p>5. Meu coração é seu pra sempre ❤️</p>
+                </div>
+            `,
+            confirmButtonText: 'Que fofo! 😍',
+            background: '#1a1a2e',
+            color: 'white',
+            confirmButtonColor: '#ff0066'
+        });
+    }
+    
     function abrirVideo() {
         window.open('https://youtu.be/1A-1M_0ytO4?si=07G1a_3Obx65Rdy1', '_blank');
     }
     
-    // FECHAR MENSAGEM E ABRIR VÍDEO
-    function fecharMensagemEAbrirVideo() {
-        document.getElementById('mensagemAceito').classList.remove('mostrar');
-        setTimeout(abrirVideo, 300);
+    function fazerPergunta() {
+        Swal.fire({
+            title: 'Uma perguntinha...',
+            text: 'Você acredita no amor à primeira vista?',
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonText: 'Sim, acredito!',
+            cancelButtonText: 'Não muito...',
+            background: '#1a1a2e',
+            color: 'white',
+            confirmButtonColor: '#ff0066',
+            cancelButtonColor: '#666'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                Swal.fire({
+                    title: 'Que bom! 😊',
+                    text: 'Porque foi assim que me senti quando te conheci!',
+                    icon: 'success',
+                    timer: 3000,
+                    showConfirmButton: false
+                });
+            } else {
+                Swal.fire({
+                    title: 'Tudo bem!',
+                    text: 'Talvez precise de uma segunda olhada então... 😉',
+                    icon: 'info',
+                    timer: 3000,
+                    showConfirmButton: false
+                });
+            }
+        });
     }
     
-    // INICIALIZAÇÃO
-    document.addEventListener('DOMContentLoaded', function() {
-        // Cria partículas
-        criarParticulas();
+    function celebrar() {
+        fecharModal();
+        abrirVideo();
         
-        // Configura botões
-        document.getElementById('btnSim').addEventListener('click', aceitou);
+        // Mais confetes!
+        lancarConfetes();
         
-        // Botão NÃO foge
-        const btnNao = document.getElementById('btnNao');
-        btnNao.addEventListener('mouseover', fazerBotaoFugir);
-        btnNao.addEventListener('touchstart', fazerBotaoFugir);
-        
-        // Se clicar no NÃO
-        btnNao.addEventListener('click', function() {
-            fazerBotaoFugir();
-        });
-        
-        // Verifica se as fotos carregaram
-        setTimeout(() => {
-            const imagens = document.querySelectorAll('img');
-            imagens.forEach(img => {
-                if (img.naturalWidth === 0) {
-                    console.log('Imagem não carregou:', img.src);
+        // Toca som de celebração
+        tocarSom('celebrar');
+    }
+    
+    function fecharModal() {
+        document.getElementById('modalOverlay').style.display = 'none';
+    }
+    
+    // SONS
+    function tocarSom(tipo) {
+        try {
+            const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            
+            if (tipo === 'vitoria') {
+                // Melodia feliz
+                const oscillator = audioContext.createOscillator();
+                const gainNode = audioContext.createGain();
+                
+                oscillator.connect(gainNode);
+                gainNode.connect(audioContext.destination);
+                
+                const notas = [523.25, 659.25, 783.99, 1046.50]; // Dó, Mi, Sol, Dó alto
+                
+                notas.forEach((nota, index) => {
+                    setTimeout(() => {
+                        oscillator.frequency.setValueAtTime(nota, audioContext.currentTime);
+                        gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
+                        gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.3);
+                    }, index * 200);
+                });
+                
+                oscillator.start();
+                setTimeout(() => oscillator.stop(), 1000);
+                
+            } else if (tipo === 'celebrar') {
+                // Som de celebração
+                for (let i = 0; i < 3; i++) {
+                    setTimeout(() => {
+                        const oscillator = audioContext.createOscillator();
+                        const gainNode = audioContext.createGain();
+                        
+                        oscillator.connect(gainNode);
+                        gainNode.connect(audioContext.destination);
+                        
+                        oscillator.frequency.setValueAtTime(880 + (i * 100), audioContext.currentTime); // Lá, Si, Dó#
+                        gainNode.gain.setValueAtTime(0.2, audioContext.currentTime);
+                        gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.2);
+                        
+                        oscillator.start();
+                        oscillator.stop(audioContext.currentTime + 0.2);
+                    }, i * 150);
                 }
-            });
-        }, 2000);
-    });
+            }
+        } catch (e) {
+            // Ignora erros de áudio
+        }
+    }
+    
+    function tocarMusicaFundo() {
+        // Poderia adicionar uma música de fundo suave aqui
+        // Mas vamos deixar sem para não incomodar
+        console.log('Música de fundo inicializada');
+    }
 </script>
 </body>
 </html>
