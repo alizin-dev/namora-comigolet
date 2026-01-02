@@ -27,6 +27,7 @@
         min-height: 100vh;
         overflow-x: hidden;
         position: relative;
+        cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Cpath fill='%23ff0066' d='M16 3C8.832 3 3 8.832 3 16s5.832 13 13 13 13-5.832 13-13S23.168 3 16 3zm0 2c6.086 0 11 4.914 11 11s-4.914 11-11 11S5 22.086 5 16 9.914 5 16 5z'/%3E%3Cpath fill='%23ff0066' d='M16 8c-4.418 0-8 3.582-8 8s3.582 8 8 8 8-3.582 8-8-3.582-8-8-8zm0 2c3.308 0 6 2.692 6 6s-2.692 6-6 6-6-2.692-6-6 2.692-6 6-6z'/%3E%3C/svg%3E") 16 16, auto;
     }
 
     /* FUNDO COM ESTRELAS */
@@ -233,7 +234,7 @@
         font-family: 'Dancing Script', cursive;
     }
 
-    /* BOTÕES INTERATIVOS */
+    /* BOTÕES INTERATIVOS - AGORA COM ANIMAÇÃO DE SUMIR */
     .buttons-grid {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
@@ -267,22 +268,61 @@
         color: white;
         box-shadow: 0 10px 30px rgba(255, 0, 102, 0.4);
         grid-column: span 2;
+        animation: pulseGlow 2s infinite;
+    }
+
+    @keyframes pulseGlow {
+        0% { box-shadow: 0 0 20px rgba(255, 0, 102, 0.4); }
+        50% { box-shadow: 0 0 40px rgba(255, 0, 102, 0.8); }
+        100% { box-shadow: 0 0 20px rgba(255, 0, 102, 0.4); }
     }
 
     .btn-yes:hover {
         transform: translateY(-10px) scale(1.05);
-        box-shadow: 0 20px 40px rgba(255, 0, 102, 0.6);
+        box-shadow: 0 20px 50px rgba(255, 0, 102, 0.8);
+        animation: none;
     }
 
+    /* BOTÃO NÃO - VAI FUGIR E DEPOIS SUMIR */
     .btn-no {
         background: linear-gradient(135deg, #333, #555);
         color: white;
         position: relative;
+        transition: all 0.3s !important;
     }
 
     .btn-no:hover {
         background: linear-gradient(135deg, #444, #666);
         transform: translateY(-5px);
+    }
+
+    /* ESTILO QUANDO O BOTÃO NÃO COMEÇA A FUGIR */
+    .btn-no.fugindo {
+        animation: tremer 0.5s infinite alternate !important;
+        background: linear-gradient(135deg, #ff3333, #ff6666) !important;
+    }
+
+    @keyframes tremer {
+        0% { transform: translateX(-5px); }
+        100% { transform: translateX(5px); }
+    }
+
+    /* ESTILO QUANDO VAI SUMIR */
+    .btn-no.sumindo {
+        animation: sumirBotao 1s forwards !important;
+        pointer-events: none !important;
+    }
+
+    @keyframes sumirBotao {
+        0% { 
+            opacity: 1;
+            transform: scale(1) rotate(0deg);
+        }
+        100% { 
+            opacity: 0;
+            transform: scale(0) rotate(360deg);
+            display: none !important;
+        }
     }
 
     .btn-extra {
@@ -300,26 +340,15 @@
         margin-bottom: 10px;
     }
 
-    /* MENSAGEM TIPO MÁQUINA DE ESCREVER */
-    .typewriter-container {
-        background: rgba(255, 255, 255, 0.05);
-        border-radius: 20px;
-        padding: 30px;
-        margin: 40px auto;
-        max-width: 800px;
-        border-left: 5px solid #ff0066;
-        min-height: 200px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-
-    .typewriter-text {
-        font-size: 1.8rem;
-        color: #ff99cc;
-        font-family: 'Dancing Script', cursive;
+    /* MENSAGEM QUANDO BOTÃO NÃO SOME */
+    .mensagem-forcada {
         text-align: center;
-        line-height: 1.6;
+        margin: 30px 0;
+        padding: 20px;
+        background: rgba(255, 0, 102, 0.1);
+        border-radius: 15px;
+        border-left: 5px solid #ff0066;
+        display: none;
     }
 
     /* CORAÇÕES FLUTUANTES */
@@ -365,7 +394,7 @@
         border-top: 1px solid rgba(255, 255, 255, 0.1);
     }
 
-    /* MODAL ESPECIAL */
+    /* MODAL ESPECIAL - CORRIGIDO PARA APARECER SOMENTE NO SIM */
     .modal-overlay {
         position: fixed;
         top: 0;
@@ -412,6 +441,21 @@
         cursor: pointer;
     }
 
+    /* CONTADOR DE TENTATIVAS */
+    .contador-tentativas {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        background: rgba(255, 0, 102, 0.8);
+        color: white;
+        padding: 10px 20px;
+        border-radius: 20px;
+        font-size: 1.2rem;
+        z-index: 100;
+        display: none;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    }
+
     /* RESPONSIVO */
     @media (max-width: 768px) {
         .title {
@@ -445,6 +489,11 @@
     
     <!-- CORAÇÕES FLUTUANTES -->
     <div class="floating-hearts" id="floatingHearts"></div>
+    
+    <!-- CONTADOR DE TENTATIVAS -->
+    <div class="contador-tentativas" id="contadorTentativas">
+        Tentativas restantes: <span id="tentativasRestantes">4</span>
+    </div>
     
     <div class="container">
         <!-- HEADER -->
@@ -481,13 +530,6 @@
             </div>
         </div>
         
-        <!-- MENSAGEM TYPEWRITER -->
-        <div class="typewriter-container">
-            <div class="typewriter-text" id="typewriter">
-                <!-- Texto será inserido via JavaScript -->
-            </div>
-        </div>
-        
         <!-- PERGUNTA PRINCIPAL -->
         <div class="question-box">
             <h2 class="question">Letícia, aceita namorar comigo?</h2>
@@ -519,17 +561,17 @@
             </button>
         </div>
         
-        <!-- BOTÕES EXTRAS -->
-        <div style="text-align: center; margin: 40px 0;">
-            <button class="interactive-btn" onclick="fazerPergunta()" 
-                    style="background: linear-gradient(135deg, #9900cc, #cc00ff); color: white; padding: 20px 40px; display: inline-flex; min-height: auto;">
-                <i class="fas fa-question-circle"></i>
-                PERGUNTA ESPECIAL PARA VOCÊ! ❓
-            </button>
+        <!-- MENSAGEM QUANDO BOTÃO NÃO SOME -->
+        <div class="mensagem-forcada" id="mensagemForcada">
+            <h3 style="color: #ff0066; margin-bottom: 10px;">HAHA! CANSEI DE FUGIR! 😜</h3>
+            <p style="font-size: 1.2rem;">
+                Agora você <strong>tem</strong> que clicar no SIM! <br>
+                Não tem mais opção! 😈❤️
+            </p>
         </div>
     </div>
     
-    <!-- MODAL DE ACEITAÇÃO -->
+    <!-- MODAL DE ACEITAÇÃO - SÓ APARECE NO SIM -->
     <div class="modal-overlay" id="modalOverlay">
         <div class="modal-content">
             <button class="close-modal" onclick="fecharModal()">×</button>
@@ -566,21 +608,17 @@
     // VARIÁVEIS GLOBAIS
     let currentSlide = 0;
     const totalSlides = 3;
-    let fugasCount = 0;
+    let tentativasRestantes = 4; // VAI SUMIR DEPOIS DE 4 TENTATIVAS
     let heartsCreated = false;
+    let botaoNaoVisivel = true;
     
     // INICIALIZAÇÃO
     document.addEventListener('DOMContentLoaded', function() {
         criarEstrelas();
         criarCoracoesFlutuantes();
-        iniciarTypeWriter();
         configurarBotoes();
         iniciarSlider();
-        
-        // Toca música de fundo suave
-        setTimeout(() => {
-            tocarMusicaFundo();
-        }, 1000);
+        atualizarContador();
     });
     
     // CRIAR ESTRELAS NO FUNDO
@@ -620,50 +658,25 @@
         heartsCreated = true;
     }
     
-    // TYPEWRITER EFFECT
-    function iniciarTypeWriter() {
-        const texts = [
-            "Letícia, desde que você entrou na minha vida...",
-            "Tudo ganhou mais cor, mais luz, mais sentido.",
-            "Cada sorriso seu é como o sol da manhã...",
-            "Cada momento ao seu lado é um presente.",
-            "Você é a pessoa mais especial que já conheci.",
-            "E hoje quero te fazer uma pergunta muito importante..."
-        ];
-        
-        let currentText = 0;
-        const typewriterEl = document.getElementById('typewriter');
-        
-        function typeNext() {
-            if (currentText >= texts.length) {
-                currentText = 0;
-                setTimeout(typeNext, 3000);
-                return;
-            }
-            
-            typewriterEl.innerHTML = '';
-            
-            new TypeIt(typewriterEl, {
-                strings: texts[currentText],
-                speed: 30,
-                waitUntilVisible: true,
-                afterComplete: () => {
-                    currentText++;
-                    setTimeout(typeNext, 2000);
-                }
-            }).go();
-        }
-        
-        typeNext();
-    }
-    
-    // CONFIGURAR BOTÕES
+    // CONFIGURAR BOTÕES - CORRIGIDO!
     function configurarBotoes() {
         const btnYes = document.getElementById('btnYes');
         const btnNo = document.getElementById('btnNo');
         
-        // BOTÃO SIM
+        // BOTÃO SIM - FUNCIONA CORRETAMENTE
         btnYes.addEventListener('click', function() {
+            // VERIFICA SE AINDA PODE CLICAR NO SIM
+            if (!botaoNaoVisivel) {
+                // Se o botão NÃO já sumiu, mostra mensagem especial
+                Swal.fire({
+                    title: 'Finalmente! 😍',
+                    text: 'Você não tinha escolha mesmo! HAHA!',
+                    icon: 'success',
+                    timer: 2000,
+                    showConfirmButton: false
+                });
+            }
+            
             // Efeitos visuais
             criarExplosaoDeCoracoes();
             
@@ -673,61 +686,183 @@
             // Mostra confetes
             lancarConfetes();
             
-            // Mostra modal
+            // Mostra modal - AGORA SÓ NO SIM!
             setTimeout(() => {
                 document.getElementById('modalOverlay').style.display = 'flex';
+                // Esconde o contador
+                document.getElementById('contadorTentativas').style.display = 'none';
             }, 1000);
             
             // Animação do botão
             this.style.animation = 'heartbeat 0.5s 3';
         });
         
-        // BOTÃO NÃO - FUGE
-        btnNo.addEventListener('mouseover', fazerBotaoFugir);
-        btnNo.addEventListener('click', function() {
-            const messages = [
-                "Errou o botão, amor! 😉",
-                "Tenta o outro botão! 💖",
-                "O certo é o vermelho! 🔥",
-                "Letícia, você sabe qual é o certo! 🥰",
-                "Não fuja do amor! ❤️",
-                "Vem pro lado da felicidade! 😄"
-            ];
+        // BOTÃO NÃO - VAI FUGIR E DEPOIS SUMIR
+        btnNo.addEventListener('mouseover', function() {
+            if (botaoNaoVisivel && tentativasRestantes > 0) {
+                fazerBotaoFugirMaisLouco();
+            }
+        });
+        
+        btnNo.addEventListener('click', function(event) {
+            event.preventDefault();
             
-            Swal.fire({
-                title: messages[Math.min(fugasCount, messages.length - 1)],
-                icon: 'warning',
-                timer: 2000,
-                showConfirmButton: false
-            });
-            
-            fazerBotaoFugir();
-            fugasCount++;
+            if (tentativasRestantes > 0) {
+                // Diminui tentativas
+                tentativasRestantes--;
+                atualizarContador();
+                
+                const messages = [
+                    "Errou de novo! 😂",
+                    "O botão certo é o VERMELHO! 🔥",
+                    "Tá difícil hein? 😜",
+                    "Última chance! Vai no SIM! 😉"
+                ];
+                
+                // Mostra mensagem conforme tentativas restantes
+                const msgIndex = Math.min(3 - tentativasRestantes, messages.length - 1);
+                
+                Swal.fire({
+                    title: messages[msgIndex],
+                    icon: 'warning',
+                    timer: 2000,
+                    showConfirmButton: false
+                });
+                
+                // Faz o botão fugir mais
+                fazerBotaoFugirMaisLouco();
+                
+                // Adiciona classe de fugindo
+                this.classList.add('fugindo');
+                setTimeout(() => this.classList.remove('fugindo'), 500);
+                
+                // Se acabaram as tentativas, faz o botão sumir
+                if (tentativasRestantes <= 0) {
+                    setTimeout(() => {
+                        fazerBotaoSumir();
+                    }, 800);
+                }
+            }
         });
     }
     
-    // FAZER BOTÃO NÃO FUGIR
-    function fazerBotaoFugir() {
+    // FAZER BOTÃO NÃO FUGIR MUITO LOUCO!
+    function fazerBotaoFugirMaisLouco() {
+        if (!botaoNaoVisivel) return;
+        
         const btnNo = document.getElementById('btnNo');
-        const maxX = window.innerWidth - btnNo.offsetWidth - 100;
-        const maxY = window.innerHeight - btnNo.offsetHeight - 100;
         
-        const newX = Math.max(50, Math.random() * maxX);
-        const newY = Math.max(50, Math.random() * maxY);
+        // Calcula uma posição BEM longe
+        const maxX = window.innerWidth - btnNo.offsetWidth - 50;
+        const maxY = window.innerHeight - btnNo.offsetHeight - 50;
         
+        // Pega posição atual do mouse para fugir do cursor
+        let newX, newY;
+        
+        // Tenta colocar o botão o mais longe possível
+        if (Math.random() > 0.5) {
+            newX = 50; // Cola na esquerda
+        } else {
+            newX = maxX; // Cola na direita
+        }
+        
+        if (Math.random() > 0.5) {
+            newY = 50; // Cola em cima
+        } else {
+            newY = maxY; // Cola embaixo
+        }
+        
+        // Adiciona um pouco de aleatoriedade
+        newX += (Math.random() * 100 - 50);
+        newY += (Math.random() * 100 - 50);
+        
+        // Garante que não sai da tela
+        newX = Math.max(20, Math.min(newX, maxX));
+        newY = Math.max(20, Math.min(newY, maxY));
+        
+        // Aplica a posição com transição mais rápida
+        btnNo.style.transition = 'all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
         btnNo.style.position = 'fixed';
         btnNo.style.left = newX + 'px';
         btnNo.style.top = newY + 'px';
-        btnNo.style.transition = 'all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
         
-        // Efeito visual
-        btnNo.style.transform = 'scale(0.9)';
-        btnNo.style.background = 'linear-gradient(135deg, #222, #444)';
+        // Efeitos visuais loucos
+        btnNo.style.transform = 'scale(0.8) rotate(' + (Math.random() * 20 - 10) + 'deg)';
+        btnNo.style.background = 'linear-gradient(135deg, #ff3333, #ff6666)';
+        btnNo.style.color = 'white';
         
+        // Efeito de som
+        tocarSom('fuga');
+        
+        // Volta ao normal depois
         setTimeout(() => {
             btnNo.style.transform = '';
             btnNo.style.background = '';
-        }, 500);
+            btnNo.style.color = '';
+        }, 300);
+    }
+    
+    // FAZER BOTÃO NÃO SUMIR DEPOIS DE 4 TENTATIVAS
+    function fazerBotaoSumir() {
+        const btnNo = document.getElementById('btnNo');
+        const mensagemForcada = document.getElementById('mensagemForcada');
+        
+        // Mostra mensagem
+        Swal.fire({
+            title: 'ACABOU AS CHANCES! 😈',
+            text: 'Agora você TEM que clicar no SIM!',
+            icon: 'info',
+            timer: 3000,
+            showConfirmButton: false
+        });
+        
+        // Animação de sumir
+        btnNo.classList.add('sumindo');
+        
+        // Desativa o botão
+        btnNo.style.pointerEvents = 'none';
+        
+        // Mostra mensagem forçada
+        setTimeout(() => {
+            mensagemForcada.style.display = 'block';
+            mensagemForcada.style.animation = 'fadeIn 1s';
+            
+            // Move o botão SIM para o lugar do NÃO
+            const btnYes = document.getElementById('btnYes');
+            btnYes.style.gridColumn = 'span 1';
+            btnYes.style.margin = '0 auto';
+            btnYes.style.width = '100%';
+            
+            // Esconde o contador
+            document.getElementById('contadorTentativas').style.display = 'none';
+        }, 1000);
+        
+        botaoNaoVisivel = false;
+    }
+    
+    // ATUALIZAR CONTADOR
+    function atualizarContador() {
+        const contador = document.getElementById('contadorTentativas');
+        const span = document.getElementById('tentativasRestantes');
+        
+        span.textContent = tentativasRestantes;
+        
+        if (tentativasRestantes < 4) {
+            contador.style.display = 'block';
+            
+            // Efeito visual no contador
+            contador.style.animation = 'pulse 0.5s';
+            setTimeout(() => {
+                contador.style.animation = '';
+            }, 500);
+        }
+        
+        // Muda cor conforme as tentativas vão acabando
+        if (tentativasRestantes === 1) {
+            contador.style.background = 'rgba(255, 50, 50, 0.9)';
+        } else if (tentativasRestantes === 2) {
+            contador.style.background = 'rgba(255, 100, 100, 0.9)';
+        }
     }
     
     // SLIDER DE FOTOS
@@ -793,6 +928,15 @@
                 0% { transform: scale(0) rotate(0deg); opacity: 1; }
                 100% { transform: scale(3) rotate(360deg); opacity: 0; }
             }
+            @keyframes pulse {
+                0% { transform: scale(1); }
+                50% { transform: scale(1.1); }
+                100% { transform: scale(1); }
+            }
+            @keyframes fadeIn {
+                from { opacity: 0; }
+                to { opacity: 1; }
+            }
         `;
         document.head.appendChild(style);
     }
@@ -854,39 +998,6 @@
         window.open('https://youtu.be/1A-1M_0ytO4?si=07G1a_3Obx65Rdy1', '_blank');
     }
     
-    function fazerPergunta() {
-        Swal.fire({
-            title: 'Uma perguntinha...',
-            text: 'Você acredita no amor à primeira vista?',
-            icon: 'question',
-            showCancelButton: true,
-            confirmButtonText: 'Sim, acredito!',
-            cancelButtonText: 'Não muito...',
-            background: '#1a1a2e',
-            color: 'white',
-            confirmButtonColor: '#ff0066',
-            cancelButtonColor: '#666'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                Swal.fire({
-                    title: 'Que bom! 😊',
-                    text: 'Porque foi assim que me senti quando te conheci!',
-                    icon: 'success',
-                    timer: 3000,
-                    showConfirmButton: false
-                });
-            } else {
-                Swal.fire({
-                    title: 'Tudo bem!',
-                    text: 'Talvez precise de uma segunda olhada então... 😉',
-                    icon: 'info',
-                    timer: 3000,
-                    showConfirmButton: false
-                });
-            }
-        });
-    }
-    
     function celebrar() {
         fecharModal();
         abrirVideo();
@@ -928,6 +1039,21 @@
                 oscillator.start();
                 setTimeout(() => oscillator.stop(), 1000);
                 
+            } else if (tipo === 'fuga') {
+                // Som de fuga/erro
+                const oscillator = audioContext.createOscillator();
+                const gainNode = audioContext.createGain();
+                
+                oscillator.connect(gainNode);
+                gainNode.connect(audioContext.destination);
+                
+                oscillator.frequency.setValueAtTime(200, audioContext.currentTime);
+                gainNode.gain.setValueAtTime(0.2, audioContext.currentTime);
+                gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.2);
+                
+                oscillator.start();
+                oscillator.stop(audioContext.currentTime + 0.2);
+                
             } else if (tipo === 'celebrar') {
                 // Som de celebração
                 for (let i = 0; i < 3; i++) {
@@ -950,12 +1076,6 @@
         } catch (e) {
             // Ignora erros de áudio
         }
-    }
-    
-    function tocarMusicaFundo() {
-        // Poderia adicionar uma música de fundo suave aqui
-        // Mas vamos deixar sem para não incomodar
-        console.log('Música de fundo inicializada');
     }
 </script>
 </body>
